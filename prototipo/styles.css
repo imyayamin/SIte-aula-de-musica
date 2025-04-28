@@ -244,3 +244,51 @@ nav {
 .naotemconta{
     color: white;
 }
+
+/*css dos botões das atividades*/
+.pagina {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px; /* espaço entre os botões e o quadro */
+    padding: 20px;
+}
+
+.selecionar-atividades {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#atividade-container {
+    width: 60%;
+    background-color: #fff;
+    margin: 0 auto; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#notas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.nota {
+    width: 50px;
+    height: 50px;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+}
