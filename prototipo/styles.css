@@ -50,6 +50,8 @@ label{
     color: #dfdfdf;
 }
 
+  
+
 .container{
     position: absolute;
     text-align: center;
@@ -162,9 +164,9 @@ nav {
 
  /* css do quem.html*/
 .nos{
-    position: absolute;
-    top: 400px;
-    left: 150px;
+    position: relative;
+    justify-content: center;
+    margin-top: 250px;
 }
 
 .textinho{
@@ -183,56 +185,61 @@ nav {
 
 
  /* css do index*/
-.comecar{
+ .comecar {
+    width: 100%;
     padding: 50px 30px;
-    position: absolute; 
-    left: 780px; 
-    bottom: 280px; 
+    position: relative;
+    display: flex;
+    justify-content: center; /* CENTRALIZA horizontalmente */
+}
+
+.comecar p {
     font-size: 40px;
 }
-.comecar p{
-    font-size: 30px;
-}
-
-
 .bemvindo{
     padding: 10px 5px;
     cursor: pointer;
     background-color: #ffffff;
-    position: absolute;
-    left: 240px;
-    right: 240px;
+    position: relative;
     border-radius: 15px;
+    max-width: 1000px; /* Limite máximo da largura */
+    width: 100%;
+    margin-left: auto; /* Margem automática à esquerda */
+    margin-right: auto; /* Margem automática à direita */
+    text-align: center; /* Centraliza o texto dentro do título */
+    padding: 10px 10px;
+      
 }
 .bemvindo h1{
     color: #7e43f1;
     font-size: 60px;
 }
+.textoComeco{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
 .textoComeco p{
-    position: absolute;
-    top: 300px;
-    left: 100px;
-    right: 100px;
     font-size: 40px;
+    margin: 40px 100px;
+    text-align: center;
 }
 
 
 /*css dos instrumentos*/
 .select-buttons {
-    position: absolute; 
-    left: 500px; 
-    top: 400px; 
+    position: relative; 
     display: flex; 
     flex-direction: row;
     justify-content: center;
     align-items: center; 
     gap: 10px;
+    margin-top: 200px; /* Ajuste o valor conforme necessário */
 }
 
 .escolha{
     position: absolute;
-    left: 300px;
-    top: 250px;
+    left: 200px;
 }
 
 .MIDI{
@@ -292,3 +299,9 @@ nav {
     font-weight: bold;
     font-size: 16px;
 }
+
+#atividade-conteudo {
+    color: #000000; /* ou qualquer cor que você preferir */
+    font-size: 20px;
+}
+

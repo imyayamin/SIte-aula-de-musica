@@ -14,7 +14,7 @@ const atividades = {
   piano5: { titulo: "Piano - Melodia Simples", conteudo: "Toque 'Brilha Brilha Estrelinha'.", notas: ["Dó", "Dó", "Sol", "Sol", "Lá", "Lá", "Sol"] },
 
   // Teclado
-  teclado1: { titulo: "Teclado - Escalas", conteudo: "Pratique escalas.", notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"] },
+  teclado1: { titulo: "Teclado - Escalas", conteudo: "Pratique escalas.", notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si","Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si","Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si","Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si","Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si","Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"] },
   teclado2: { titulo: "Teclado - Acordes", conteudo: "Aprenda acordes simples.", notas: ["Dó", "Mi", "Sol"] },
   teclado3: { titulo: "Teclado - Ritmo", conteudo: "Toque com ritmo.", notas: ["Mi", "Fá", "Sol", "Fá", "Mi"] },
   teclado4: { titulo: "Teclado - Duas Mãos", conteudo: "Coordene duas mãos.", notas: ["Dó", "Fá", "Lá", "Dó"] },
