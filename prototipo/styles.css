@@ -8,26 +8,27 @@ body {
     position: relative; /* Necessário para posicionamento absoluto dos elementos dentro do body */
 }
 
-
 h1 {
     color: #dfdfdf;
     font-size: 40px; 
 }
 
-p{
+p {
     color: #dfdfdf;
     font-size: 18px;
 }
+
 a.sem-cor {
     color: #dfdfdf; /* Faz com que a cor do link herde a cor do texto ao redor */
     text-decoration: none; /* Remove o sublinhado padrão */
 }
+
 a.sem-cor:hover {
     color: #dfdfdf; /* Mantém a cor igual ao texto ao redor */
     text-decoration: none; /* Remove o sublinhado no hover */
 }
 
-main{
+main {
     position: absolute;
     left: 80px;
 }
@@ -44,15 +45,12 @@ button {
     margin: 10px 0; 
 } 
 
-
-label{
+label {
     font-family: arial;
     color: #dfdfdf;
 }
 
-  
-
-.container{
+.container {
     position: absolute;
     text-align: center;
     margin: 0;
@@ -62,13 +60,11 @@ label{
     padding: 10px 20px;
 }
 
-
-
-/* css do nav*/
+/* css do nav */
 :root {
     --nav-background: #7e43f1;
     --nav-border: .5rem solid #9d77e9;
-  }
+}
 
 nav {
     display: flex;
@@ -80,24 +76,26 @@ nav {
     font-size: 3rem;
     padding: .1em;
     margin: 20px;
-  }
- nav h1{
-            color: #dfdfdf;
-            font-size: 22px;
-        }
-
-.logo{
-        display: flex;
-        align-items: center;
-        gap: 10px;  
 }
 
-.usuario{
+nav h1 {
+    color: #dfdfdf;
+    font-size: 22px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;  
+}
+
+.usuario {
     width: 40px;
     height: 40px;
     object-fit: contain;
     border-radius: 5px;
 }
+
 .dropdown {
     display: none;
     position: absolute;
@@ -108,11 +106,12 @@ nav {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     z-index: 1000;
 }
+
 .menu-container {
     position: relative; /* <- importante para o posicionamento do dropdown */
-  }
-  
-.tabela{
+}
+
+.tabela {
     padding: 0px 50px;
     cursor: pointer;
     background-color: #000000;
@@ -123,15 +122,17 @@ nav {
     border-radius: 15px;
     margin: 1px 0; 
 }
-/* css do fazer.html*/
-.comofazer h1{
+
+/* css do fazer.html */
+.comofazer h1 {
     color: #dfdfdf;
     font-size: 50px;
     position: relative;
     left: 350px;
     top: 0px;
 }
-.oqueprecisa{
+
+.oqueprecisa {
     padding: 0px 50px;
     cursor: pointer;
     background-color: #7e43f1;
@@ -141,13 +142,14 @@ nav {
     margin: 1px 0; 
     position: absolute;
     right: 150px;
-    top:250px
+    top: 250px;
 }
-.oqueprecisa p{
+
+.oqueprecisa p {
     font-size: 30px;
 }
 
-.video{ 
+.video { 
     padding: 280px 250px;
     cursor: pointer;
     background-color: #7e43f1;
@@ -157,19 +159,17 @@ nav {
     margin: 1px 0; 
     position: absolute;
     left: 150px;
-    top:250px
+    top: 250px;
 }
 
-
-
- /* css do quem.html*/
-.nos{
+/* css do quem.html */
+.nos {
     position: relative;
     justify-content: center;
     margin-top: 250px;
 }
 
-.textinho{
+.textinho {
     padding: 50px 10px;
     cursor: pointer;
     background-color: #ffffff;
@@ -178,14 +178,13 @@ nav {
     right: 240px;
     border-radius: 15px;
 }
-.textinho p{
+
+.textinho p {
     color: #000000;
 }
 
-
-
- /* css do index*/
- .comecar {
+/* css do index */
+.comecar {
     width: 100%;
     padding: 50px 30px;
     position: relative;
@@ -196,7 +195,8 @@ nav {
 .comecar p {
     font-size: 40px;
 }
-.bemvindo{
+
+.bemvindo {
     padding: 10px 5px;
     cursor: pointer;
     background-color: #ffffff;
@@ -208,25 +208,26 @@ nav {
     margin-right: auto; /* Margem automática à direita */
     text-align: center; /* Centraliza o texto dentro do título */
     padding: 10px 10px;
-      
 }
-.bemvindo h1{
+
+.bemvindo h1 {
     color: #7e43f1;
     font-size: 60px;
 }
-.textoComeco{
+
+.textoComeco {
     position: relative;
     margin-left: auto;
     margin-right: auto;
 }
-.textoComeco p{
+
+.textoComeco p {
     font-size: 40px;
     margin: 40px 100px;
     text-align: center;
 }
 
-
-/*css dos instrumentos*/
+/* css dos instrumentos */
 .select-buttons {
     position: relative; 
     display: flex; 
@@ -237,22 +238,22 @@ nav {
     margin-top: 200px; /* Ajuste o valor conforme necessário */
 }
 
-.escolha{
+.escolha {
     position: absolute;
     left: 200px;
 }
 
-.MIDI{
+.MIDI {
     font-size: 60px;
 }
 
-/*css do login*/
-
-.naotemconta{
+/* css do login */
+.naotemconta {
     color: white;
 }
 
-/*css dos botões das atividades*/
+/* css dos botões das atividades */
+/* css dos botões das atividades */
 .pagina {
     display: flex;
     flex-direction: column;
@@ -298,10 +299,25 @@ nav {
     border-radius: 5px;
     font-weight: bold;
     font-size: 16px;
+    transition: background-color 0.3s ease; /* Para transições suaves de cor */
 }
 
+.nota-pressionada {
+    padding: 8px;
+    margin: 5px;
+    background-color: gray;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+.nota-correta {
+    background-color: green;
+}
+
+.nota-errada {
+    background-color: red;
+}
 #atividade-conteudo {
     color: #000000; /* ou qualquer cor que você preferir */
     font-size: 20px;
 }
-
