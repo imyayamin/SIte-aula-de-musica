@@ -281,6 +281,12 @@ nav h1 {
     gap: 20px;
 }
 
+#atividade-conteudo {
+    color: #000000; /* ou qualquer cor que você preferir */
+    font-size: 20px;
+}
+
+
 #notas {
     display: flex;
     flex-wrap: wrap;
@@ -314,10 +320,35 @@ nav h1 {
     background-color: green;
 }
 
+/*introduz uma vibração na nota errada*/
+@keyframes vibrar { /* @keyframes define a animação personalizada (como se fosse um script visual).*/
+    0%   { transform: translateX(0); }        /* Posição inicial: sem deslocamento */
+    25%  { transform: translateX(-3px); }     /* Move 3 pixels para a esquerda */
+    50%  { transform: translateX(3px); }      /* Move 3 pixels para a direita */
+    75%  { transform: translateX(-3px); }     /* Move novamente para a esquerda */
+    100% { transform: translateX(0); }        /* Volta para a posição original */
+  }
+  
 .nota-errada {
     background-color: red;
+    animation: vibrar 0.3s;
 }
-#atividade-conteudo {
-    color: #000000; /* ou qualquer cor que você preferir */
-    font-size: 20px;
+
+#monitor {
+    padding: 10px;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    border-radius: 5px;
+    max-height: 360px;
+    overflow-y: auto;
+    position: absolute;
+    top: 250px;
+    left: 20px; 
 }
+
+  
+  #notas-pressionadas {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
+  }
+  
