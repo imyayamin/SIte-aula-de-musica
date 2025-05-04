@@ -17,41 +17,16 @@ const tecladoNotas = {
 };
 
 // Lista com os IDs de todos os botões de atividades
-const botoes = [
-  'piano1', 'piano2', 'piano3', 'piano4', 'piano5',
-  '1', '2', '3', '4', '5', // todas as atividades terão de ser identificadas por numeros se não não fucniona o "pular de atividade"
-  'acordeao1', 'acordeao2', 'acordeao3', 'acordeao4', 'acordeao5',
-  'violoncelo1', 'violoncelo2', 'violoncelo3', 'violoncelo4', 'violoncelo5'
+const botoes = [// todas as atividades terão de ser identificadas por numeros se não não fucniona o "pular de atividade"
+  '1', '2', '3', '4', '5', // teclado
+  '201', '202', '203', '204', '205', // piano
+  '401', '402', '403', '404', '405', //acordeão
+  '601', '602', '603', '604', '605'//violoncelo
 ];
 
 // Objeto que guarda todas as atividades divididas por instrumento
 const atividades = {
-    piano1: {
-      titulo: "Piano - Escalas",
-      notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"],
-      instrumento: "piano",  // Atividade para piano
-    },
-    piano2: {
-      titulo: "Piano - Acordes",
-      notas: ["Dó", "Fá", "Sol"],
-      instrumento: "piano",  // Atividade para piano
-    },
-    piano3: {
-      titulo: "Piano - Mão Direita",
-      notas: ["Mi", "Fá", "Sol"],
-      instrumento: "piano",  // Atividade para piano
-    },
-    piano4: {
-      titulo: "Piano - Mão Esquerda",
-      notas: ["Dó", "Mi", "Sol"],
-      instrumento: "piano",  // Atividade para piano
-    },
-    piano5: {
-      titulo: "Piano - Melodia Simples",
-      notas: ["Dó", "Dó", "Sol", "Sol", "Lá", "Lá", "Sol"],
-      instrumento: "piano",  // Atividade para piano
-    },
-  
+    //teclado
     1: {
       titulo: "Teclado - Escalas",
       notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si", "Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si", "Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"],
@@ -77,54 +52,83 @@ const atividades = {
       notas: ["Sol", "Lá", "Si", "Dó", "Si", "Lá"],
       instrumento: "teclado",  // Atividade para teclado
     },
+
+    //piano
+    201: {
+      titulo: "Piano - Escalas",
+      notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"],
+      instrumento: "piano",  // Atividade para piano
+    },
+    202: {
+      titulo: "Piano - Acordes",
+      notas: ["Dó", "Fá", "Sol"],
+      instrumento: "piano",  // Atividade para piano
+    },
+    203: {
+      titulo: "Piano - Mão Direita",
+      notas: ["Mi", "Fá", "Sol"],
+      instrumento: "piano",  // Atividade para piano
+    },
+    204: {
+      titulo: "Piano - Mão Esquerda",
+      notas: ["Dó", "Mi", "Sol"],
+      instrumento: "piano",  // Atividade para piano
+    },
+    205: {
+      titulo: "Piano - Melodia Simples",
+      notas: ["Dó", "Dó", "Sol", "Sol", "Lá", "Lá", "Sol"],
+      instrumento: "piano",  // Atividade para piano
+    },
   
-    acordeao1: {
+    //acordeão
+    401: {
       titulo: "Acordeão - Escalas",
       notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"],
       instrumento: "acordeão",  // Atividade para acordeão
     },
-    acordeao2: {
+    402: {
       titulo: "Acordeão - Acordes",
       notas: ["Dó", "Fá", "Sol"],
       instrumento: "acordeão",  // Atividade para acordeão
     },
-    acordeao3: {
+    403: {
       titulo: "Acordeão - Mão Direita",
       notas: ["Mi", "Fá", "Sol"],
       instrumento: "acordeão",  // Atividade para acordeão
     },
-    acordeao4: {
+    404: {
       titulo: "Acordeão - Mão Esquerda",
       notas: ["Dó", "Sol"],
       instrumento: "acordeão",  // Atividade para acordeão
     },
-    acordeao5: {
+    405: {
       titulo: "Acordeão - Pequena música",
       notas: ["Dó", "Mi", "Sol", "Fá", "Mi", "Dó"],
       instrumento: "acordeão",  // Atividade para acordeão
     },
   
-    violoncelo1: {
+    //violoncelo
+    601: {
       titulo: "Violoncelo - Corda Sol",
       notas: ["Sol", "Lá", "Si", "Dó"],
       instrumento: "violoncelo",  // Atividade para violoncelo
     },
-    violoncelo2: {
+    602: {
       titulo: "Violoncelo - Corda Ré",
       notas: ["Ré", "Mi", "Fá#", "Sol"],
       instrumento: "violoncelo",  // Atividade para violoncelo
     },
-    violoncelo3: {
+    603: {
       titulo: "Violoncelo - Corda Lá",
       notas: ["Lá", "Si", "Dó#", "Ré"],
       instrumento: "violoncelo",  // Atividade para violoncelo
     },
-    violoncelo4: {
+    604: {
       titulo: "Violoncelo - Corda Dó",
       notas: ["Dó", "Ré", "Mi", "Fá"],
       instrumento: "violoncelo",  // Atividade para violoncelo
     },
-    violoncelo5: {
+    605: {
       titulo: "Violoncelo - Escalas Completas",
       notas: ["Sol", "Lá", "Si", "Dó", "Ré", "Mi", "Fá", "Sol"],
       instrumento: "violoncelo",  // Atividade para violoncelo
@@ -345,6 +349,7 @@ function carregarProximaAtividade() {
       // Marca a atividade como concluída
       atividadesConcluidas++; 
 
+      // essa parte não ta funcionando mas se pá é pq não tem progresso
       // Atualiza a barra de progresso ou outro indicador de progresso
       atualizarProgresso();
     }
