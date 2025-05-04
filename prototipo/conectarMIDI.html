@@ -25,3 +25,65 @@
     <script src="script.js"></script>
 </body>
 </html>
+
+// possível forma de conectar o MIDI
+
+// Mapeamento de números MIDI para nomes de notas (C4 = 60, Dó = 60)
+const midiNotas = {
+  60: 'Dó',
+  62: 'Ré',
+  64: 'Mi',
+  65: 'Fá',
+  67: 'Sol',
+  69: 'Lá',
+  71: 'Si'
+};
+
+// Função para inicializar o acesso MIDI
+function iniciarMIDI() {
+  if (navigator.requestMIDIAccess) {
+    navigator.requestMIDIAccess()
+      .then(onMIDISucesso, onMIDIFalha);
+  } else {
+    console.warn("Web MIDI API não é suportado neste navegador.");
+  }
+}
+
+// Sucesso: conectar dispositivos MIDI
+function onMIDISucesso(midiAccess) {
+  for (let entrada of midiAccess.inputs.values()) {
+    entrada.onmidimessage = tratarMensagemMIDI;
+  }
+  console.log("MIDI conectado!");
+}
+
+// Falha ao acessar MIDI
+function onMIDIFalha() {
+  console.warn("Não foi possível acessar dispositivos MIDI.");
+}
+
+// Tratar mensagens recebidas do controlador MIDI
+function tratarMensagemMIDI(evento) {
+  const [status, nota, intensidade] = evento.data;
+
+  // 144 = Note ON, 128 = Note OFF. Só trata Note ON com intensidade > 0
+  if (status === 144 && intensidade > 0) {
+    const nomeNota = midiNotas[nota];
+    if (nomeNota) {
+      mostrarNota(nomeNota);
+      verificarSequencia(nomeNota);
+      mostrarMonitor();
+    }
+  }
+}
+
+// Inicia o MIDI quando a página carrega
+window.addEventListener('load', iniciarMIDI);
+//Código JavaScript básico para acessar o dispositivo MIDI.
+navigator.requestMIDIAccess().then((acesso) => {
+  for (let entrada of acesso.inputs.values()) {
+    entrada.onmidimessage = (msg) => {
+      console.log("Mensagem MIDI:", msg.data);
+    };
+  }
+});
