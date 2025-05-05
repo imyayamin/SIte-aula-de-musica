@@ -6,6 +6,7 @@ function toggleMenu() {
 }
 
 // Mapeamento de teclas do teclado do computador para notas musicais
+// creio que pro midi seja o mesmo esquema
 const tecladoNotas = {
   'a': 'Dó',
   's': 'Ré',
@@ -13,7 +14,12 @@ const tecladoNotas = {
   'f': 'Fá',
   'g': 'Sol',
   'h': 'Lá',
-  'j': 'Si'
+  'j': 'Si',
+  'z': 'Dó#',
+  'x': 'Ré#',
+  'v': 'Fá#',
+  'b': 'Sol#',
+  'm': 'Lá#',
 };
 
 // Lista com os IDs de todos os botões de atividades
@@ -38,18 +44,27 @@ const atividades = {
       instrumento: "teclado",  // Atividade para teclado
     },
     3: {
-      titulo: "Teclado - Ritmo",
-      notas: ["Mi", "Fá", "Sol", "Fá", "Mi"],
+      titulo: "Teclado - Do-Re-Mi",
+      notas: [   "Dó", "Dó", "Ré", "Mi", "Mi", "Fá", "Fá#", "Sol",
+        "Sol", "Sol", "Lá", "Si", "Si", "Dó",
+        "Dó", "Dó", "Ré", "Mi", "Fá", "Fá#",
+        "Sol", "Fá#", "Mi", "Ré", "Dó"],
       instrumento: "teclado",  // Atividade para teclado
     },
     4: {
-      titulo: "Teclado - Duas Mãos",
-      notas: ["Dó", "Fá", "Lá", "Dó"],
+      titulo: "Teclado - Cucaracha",
+      notas: [  "Sol", "Sol", "Lá", "Sol", "Dó", "Si",
+        "Sol", "Sol", "Lá", "Sol", "Dó", "Si",
+        "Sol", "Sol", "Lá", "Sol", "Dó", "Si",
+        "Sol", "Fá#", "Mi"],
       instrumento: "teclado",  // Atividade para teclado
     },
     5: {
-      titulo: "Teclado - Melodia",
-      notas: ["Sol", "Lá", "Si", "Dó", "Si", "Lá"],
+      titulo: "Teclado - Parabéns pra você",
+      notas: [    "Dó", "Dó", "Ré", "Dó", "Fá", "Mi",
+        "Dó", "Dó", "Ré", "Dó", "Sol", "Fá",
+        "Lá", "Lá", "Dó", "Lá", "Fá", "Mi", "Ré",
+        "Lá", "Lá", "Sol", "Fá", "Sol", "Fá"],
       instrumento: "teclado",  // Atividade para teclado
     },
 
