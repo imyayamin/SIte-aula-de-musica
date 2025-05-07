@@ -1,12 +1,9 @@
 // Função para abrir ou fechar o menu de login/cadastro
 function toggleMenu() {
-  const menu = document.getElementById("userMenu"); // Seleciona o elemento HTML com id "userMenu"
-  // Verifica se o menu está visível (display: block). Se estiver, esconde (display: none). Se estiver escondido, mostra.
+  const menu = document.getElementById("userMenu");
   menu.style.display = (menu.style.display === "block") ? "none" : "block";
 }
 
-// Mapeamento de teclas do teclado do computador para notas musicais
-// creio que pro midi seja o mesmo esquema
 const tecladoNotas = {
   'a': 'Dó',
   's': 'Ré',
@@ -22,297 +19,248 @@ const tecladoNotas = {
   'm': 'Lá#',
 };
 
-// Lista com os IDs de todos os botões de atividades
-const botoes = [// todas as atividades terão de ser identificadas por numeros se não não fucniona o "pular de atividade"
-  '1', '2', '3', '4', '5', // teclado
-  '201', '202', '203', '204', '205', // piano
-  '401', '402', '403', '404', '405', //acordeão
-  '601', '602', '603', '604', '605'//violoncelo
+const botoes = [
+  '1', '2', '3', '4', '5',
+  '201', '202', '203', '204', '205',
+  '401', '402', '403', '404', '405',
+  '601', '602', '603', '604', '605'
 ];
 
-// Objeto que guarda todas as atividades divididas por instrumento
 const atividades = {
-    //teclado
-    1: {
-      titulo: "Teclado - Escalas",
-      notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si", "Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si", "Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"],
-      instrumento: "teclado",  // Atividade para teclado
-    },
-    2: {
-      titulo: "Teclado - Acordes",
-      notas: ["Dó", "Mi", "Sol"],
-      instrumento: "teclado",  // Atividade para teclado
-    },
-    3: {
-      titulo: "Teclado - Do-Re-Mi",
-      notas: [   "Dó", "Dó", "Ré", "Mi", "Mi", "Fá", "Fá#", "Sol",
-        "Sol", "Sol", "Lá", "Si", "Si", "Dó",
-        "Dó", "Dó", "Ré", "Mi", "Fá", "Fá#",
-        "Sol", "Fá#", "Mi", "Ré", "Dó"],
-      instrumento: "teclado",  // Atividade para teclado
-    },
-    4: {
-      titulo: "Teclado - Cucaracha",
-      notas: [  "Sol", "Sol", "Lá", "Sol", "Dó", "Si",
-        "Sol", "Sol", "Lá", "Sol", "Dó", "Si",
-        "Sol", "Sol", "Lá", "Sol", "Dó", "Si",
-        "Sol", "Fá#", "Mi"],
-      instrumento: "teclado",  // Atividade para teclado
-    },
-    5: {
-      titulo: "Teclado - Parabéns pra você",
-      notas: [    "Dó", "Dó", "Ré"],
-      instrumento: "teclado",  // Atividade para teclado
-    },
+  1: {
+    titulo: "Teclado - Escalas",
+    notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si", "Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si", "Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"],
+    instrumento: "teclado",
+  },
+  2: {
+    titulo: "Teclado - Acordes",
+    notas: ["Dó", "Mi", "Sol"],
+    instrumento: "teclado",
+  },
+  3: {
+    titulo: "Teclado - Do-Re-Mi",
+    notas: ["Dó", "Dó", "Ré", "Mi", "Mi", "Fá", "Fá#", "Sol",
+      "Sol", "Sol", "Lá", "Si", "Si", "Dó",
+      "Dó", "Dó", "Ré", "Mi", "Fá", "Fá#",
+      "Sol", "Fá#", "Mi", "Ré", "Dó"],
+    instrumento: "teclado",
+  },
+  4: {
+    titulo: "Teclado - Cucaracha",
+    notas: ["Sol", "Sol", "Lá", "Sol", "Dó", "Si",
+      "Sol", "Sol", "Lá", "Sol", "Dó", "Si",
+      "Sol", "Sol", "Lá", "Sol", "Dó", "Si",
+      "Sol", "Fá#", "Mi"],
+    instrumento: "teclado",
+  },
+  5: {
+    titulo: "Teclado - Parabéns pra você",
+    notas: ["Dó", "Dó", "Ré"],
+    instrumento: "teclado",
+  },
+  201: {
+    titulo: "Piano - Escalas",
+    notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"],
+    instrumento: "piano",
+  },
+  202: {
+    titulo: "Piano - Acordes",
+    notas: ["Dó", "Fá", "Sol"],
+    instrumento: "piano",
+  },
+  203: {
+    titulo: "Piano - Mão Direita",
+    notas: ["Mi", "Fá", "Sol"],
+    instrumento: "piano",
+  },
+  204: {
+    titulo: "Piano - Mão Esquerda",
+    notas: ["Dó", "Mi", "Sol"],
+    instrumento: "piano",
+  },
+  205: {
+    titulo: "Piano - Melodia Simples",
+    notas: ["Dó", "Dó", "Sol", "Sol", "Lá", "Lá", "Sol"],
+    instrumento: "piano",
+  },
+  401: {
+    titulo: "Acordeão - Escalas",
+    notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"],
+    instrumento: "acordeão",
+  },
+  402: {
+    titulo: "Acordeão - Acordes",
+    notas: ["Dó", "Fá", "Sol"],
+    instrumento: "acordeão",
+  },
+  403: {
+    titulo: "Acordeão - Mão Direita",
+    notas: ["Mi", "Fá", "Sol"],
+    instrumento: "acordeão",
+  },
+  404: {
+    titulo: "Acordeão - Mão Esquerda",
+    notas: ["Dó", "Sol"],
+    instrumento: "acordeão",
+  },
+  405: {
+    titulo: "Acordeão - Pequena música",
+    notas: ["Dó", "Mi", "Sol", "Fá", "Mi", "Dó"],
+    instrumento: "acordeão",
+  },
+  601: {
+    titulo: "Violoncelo - Corda Sol",
+    notas: ["Sol", "Lá", "Si", "Dó"],
+    instrumento: "violoncelo",
+  },
+  602: {
+    titulo: "Violoncelo - Corda Ré",
+    notas: ["Ré", "Mi", "Fá#", "Sol"],
+    instrumento: "violoncelo",
+  },
+  603: {
+    titulo: "Violoncelo - Corda Lá",
+    notas: ["Lá", "Si", "Dó#", "Ré"],
+    instrumento: "violoncelo",
+  },
+  604: {
+    titulo: "Violoncelo - Corda Dó",
+    notas: ["Dó", "Ré", "Mi", "Fá"],
+    instrumento: "violoncelo",
+  },
+  605: {
+    titulo: "Violoncelo - Escalas Completas",
+    notas: ["Sol", "Lá", "Si", "Dó", "Ré", "Mi", "Fá", "Sol"],
+    instrumento: "violoncelo",
+  }
+};
 
-    //piano
-    201: {
-      titulo: "Piano - Escalas",
-      notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"],
-      instrumento: "piano",  // Atividade para piano
-    },
-    202: {
-      titulo: "Piano - Acordes",
-      notas: ["Dó", "Fá", "Sol"],
-      instrumento: "piano",  // Atividade para piano
-    },
-    203: {
-      titulo: "Piano - Mão Direita",
-      notas: ["Mi", "Fá", "Sol"],
-      instrumento: "piano",  // Atividade para piano
-    },
-    204: {
-      titulo: "Piano - Mão Esquerda",
-      notas: ["Dó", "Mi", "Sol"],
-      instrumento: "piano",  // Atividade para piano
-    },
-    205: {
-      titulo: "Piano - Melodia Simples",
-      notas: ["Dó", "Dó", "Sol", "Sol", "Lá", "Lá", "Sol"],
-      instrumento: "piano",  // Atividade para piano
-    },
-  
-    //acordeão
-    401: {
-      titulo: "Acordeão - Escalas",
-      notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"],
-      instrumento: "acordeão",  // Atividade para acordeão
-    },
-    402: {
-      titulo: "Acordeão - Acordes",
-      notas: ["Dó", "Fá", "Sol"],
-      instrumento: "acordeão",  // Atividade para acordeão
-    },
-    403: {
-      titulo: "Acordeão - Mão Direita",
-      notas: ["Mi", "Fá", "Sol"],
-      instrumento: "acordeão",  // Atividade para acordeão
-    },
-    404: {
-      titulo: "Acordeão - Mão Esquerda",
-      notas: ["Dó", "Sol"],
-      instrumento: "acordeão",  // Atividade para acordeão
-    },
-    405: {
-      titulo: "Acordeão - Pequena música",
-      notas: ["Dó", "Mi", "Sol", "Fá", "Mi", "Dó"],
-      instrumento: "acordeão",  // Atividade para acordeão
-    },
-  
-    //violoncelo
-    601: {
-      titulo: "Violoncelo - Corda Sol",
-      notas: ["Sol", "Lá", "Si", "Dó"],
-      instrumento: "violoncelo",  // Atividade para violoncelo
-    },
-    602: {
-      titulo: "Violoncelo - Corda Ré",
-      notas: ["Ré", "Mi", "Fá#", "Sol"],
-      instrumento: "violoncelo",  // Atividade para violoncelo
-    },
-    603: {
-      titulo: "Violoncelo - Corda Lá",
-      notas: ["Lá", "Si", "Dó#", "Ré"],
-      instrumento: "violoncelo",  // Atividade para violoncelo
-    },
-    604: {
-      titulo: "Violoncelo - Corda Dó",
-      notas: ["Dó", "Ré", "Mi", "Fá"],
-      instrumento: "violoncelo",  // Atividade para violoncelo
-    },
-    605: {
-      titulo: "Violoncelo - Escalas Completas",
-      notas: ["Sol", "Lá", "Si", "Dó", "Ré", "Mi", "Fá", "Sol"],
-      instrumento: "violoncelo",  // Atividade para violoncelo
-    }
-  };
+let indiceNotaAtual = 0;
 
-let indiceNotaAtual = 0; // Variável que guarda qual a próxima nota que o usuário precisa tocar (posição na lista)
+let progresso = JSON.parse(localStorage.getItem('progresso')) || {
+  teclado: [],
+  piano: [],
+  acordeão: [],
+  violoncelo: []
+};
 
-// Para cada ID, busca o botão correspondente no HTML e adiciona um clique que mostra a atividade
 botoes.forEach(id => {
-  const botao = document.getElementById(id); // Busca o botão no HTML
-  if (botao) { // Se o botão existir
-    botao.addEventListener('click', () => mostrarAtividade(id)); // Quando clicado, chama a função mostrarAtividade
+  const botao = document.getElementById(id);
+  if (botao) {
+    botao.addEventListener('click', () => mostrarAtividade(id));
   }
 });
 
-// Função que exibe uma atividade na tela
 function mostrarAtividade(id) {
-  const atividade = atividades[id]; // Recupera a atividade pelo ID
-  if (!atividade) return; // Se não encontrar, não faz nada (evita erro)
+  const atividade = atividades[id];
+  if (!atividade) return;
 
-  indiceNotaAtual = 0; // Reinicia a contagem de notas para começar a atividade do zero
-
-  // Atualiza o título e conteúdo da atividade no HTML
+  indiceNotaAtual = 0;
   document.getElementById('atividade-titulo').textContent = atividade.titulo;
   document.getElementById('atividade-conteudo').textContent = atividade.conteudo;
 
-  const notasDiv = document.getElementById('notas'); // Seleciona a área onde as notas serão exibidas
-  notasDiv.innerHTML = ''; // Limpa essa área, apagando notas anteriores
+  const notasDiv = document.getElementById('notas');
+  notasDiv.innerHTML = '';
 
-  document.getElementById('notas-pressionadas').innerHTML = ''; // Também limpa o monitor com notas já pressionadas ao trocar de atividade
+  document.getElementById('notas-pressionadas').innerHTML = '';
 
-  // Para cada nota da atividade, cria um elemento visual na tela
   atividade.notas.forEach(nota => {
-    const notaDiv = document.createElement('div'); // Cria uma nova <div>
-    notaDiv.classList.add('nota'); // Adiciona uma classe CSS chamada "nota"
-    notaDiv.textContent = nota; // Coloca o texto da nota dentro da <div>
-    notaDiv.setAttribute('data-nota', nota); // Define um atributo chamado "data-nota" com o nome da nota (útil para comparar depois)
-    notasDiv.appendChild(notaDiv); // Adiciona essa nova <div> no HTML
+    const notaDiv = document.createElement('div');
+    notaDiv.classList.add('nota');
+    notaDiv.textContent = nota;
+    notaDiv.setAttribute('data-nota', nota);
+    notasDiv.appendChild(notaDiv);
   });
 
-  // Esconde o monitor ao carregar a nova atividade
   const monitor = document.getElementById('monitor');
-  monitor.style.display = 'none'; // Esconde o monitor
+  monitor.style.display = 'none';
 
-  // Mostra o container da nova atividade (onde aparece o título, instrução e as notas)
   document.getElementById('atividade-container').style.display = 'block';
+  atualizarBarraProgresso(atividade.instrumento);
 }
 
-// Função para atualizar o monitor com a nota pressionada
 function atualizarMonitor(nota) {
-  // Seleciona o elemento HTML onde as notas pressionadas são registradas
-  const logDiv = document.getElementById('notas-pressionadas'); 
-
-  // Cria um novo elemento <div> para exibir a nota pressionada
-  const novoLog = document.createElement('div'); 
-
-  // Define o texto da nova <div> com a nota que foi pressionada
-  novoLog.textContent = `Nota pressionada: ${nota}`; 
-
-  // Adiciona a nova <div> ao container (onde as notas pressionadas são exibidas)
-  logDiv.appendChild(novoLog); 
-
-  // Limita o número de logs para não sobrecarregar o painel (mantém no máximo 100)
-  if (logDiv.childElementCount > 100) {
-    // Remove o log mais antigo se o número de logs for maior que 100
-    logDiv.removeChild(logDiv.firstChild); 
-  }
-
-  // Chama a função para rolar o painel para o final automaticamente
-  rolarParaFinal(); 
-}
-
-// Função para mostrar o monitor (caso ele esteja escondido)
-function mostrarMonitor() {
-  // Seleciona o elemento do monitor no HTML
-  const monitor = document.getElementById('monitor');
-  
-  // Torna o monitor visível, mudando o estilo de display para 'block'
-  monitor.style.display = 'block'; 
-
-  // Chama a função que rola o conteúdo para o final quando o monitor for exibido
-  rolarParaFinal();  
-}
-
-// Função que rola automaticamente o painel de notas para o final
-function rolarParaFinal() {
-  // Seleciona o elemento que contém as notas pressionadas
   const logDiv = document.getElementById('notas-pressionadas');
-  
-  // Ajusta a rolagem para o final do painel, assim a última nota fica visível
-  logDiv.scrollTop = logDiv.scrollHeight; 
+  const novoLog = document.createElement('div');
+  novoLog.textContent = `Nota pressionada: ${nota}`;
+  logDiv.appendChild(novoLog);
+
+  if (logDiv.childElementCount > 100) {
+    logDiv.removeChild(logDiv.firstChild);
+  }
+
+  rolarParaFinal();
 }
 
-// Função que é chamada toda vez que o usuário aperta uma tecla
+function mostrarMonitor() {
+  const monitor = document.getElementById('monitor');
+  monitor.style.display = 'block';
+  rolarParaFinal();
+}
+
+function rolarParaFinal() {
+  const logDiv = document.getElementById('notas-pressionadas');
+  logDiv.scrollTop = logDiv.scrollHeight;
+}
+
 function handleKeyPress(event) {
-  // Converte a tecla pressionada para minúscula
-  const tecla = event.key.toLowerCase(); 
+  const tecla = event.key.toLowerCase();
+  const nota = tecladoNotas[tecla];
 
-  // Usa a tecla pressionada para buscar a nota correspondente no objeto 'tecladoNotas'
-  const nota = tecladoNotas[tecla]; 
-
-  // Se a tecla pressionada corresponde a uma nota válida
-  if (nota) { 
-    // Mostra a nota pressionada no painel
-    mostrarNota(nota); 
-
-    // Verifica se a nota pressionada está correta na sequência da atividade
-    verificarSequencia(nota); 
-
-    // Torna o monitor visível, caso ainda não tenha sido exibido
-    mostrarMonitor(); 
+  if (nota) {
+    mostrarNota(nota);
+    verificarSequencia(nota);
+    mostrarMonitor();
   }
 }
 
-// Função que exibe a nota pressionada no painel de notas pressionadas
 function mostrarNota(nota) {
-  // Seleciona o painel onde as notas pressionadas serão exibidas
-  const container = document.getElementById('notas-pressionadas'); 
-
-  // Cria uma nova <div> para exibir a nota pressionada
-  const divNota = document.createElement('div'); 
-
-  // Adiciona a classe CSS 'nota-pressionada' para estilizar a nota
-  divNota.classList.add('nota-pressionada'); 
-
-  // Define o conteúdo da nova <div> com a nota pressionada
-  divNota.textContent = `Você pressionou: ${nota}`; 
-
-  // Adiciona a nova <div> ao painel de notas pressionadas
-  container.appendChild(divNota); 
+  const container = document.getElementById('notas-pressionadas');
+  const divNota = document.createElement('div');
+  divNota.classList.add('nota-pressionada');
+  divNota.textContent = `Você pressionou: ${nota}`;
+  container.appendChild(divNota);
 }
 
-// Verifica se a nota pressionada está correta dentro da ordem esperada
 function verificarSequencia(notaPressionada) {
-  const titulo = document.getElementById('atividade-titulo').textContent; // Pega o título da atividade atual exibida na tela.
-  
-  // Encontra o ID da atividade com base no título. Com isso, sabemos qual atividade está em andamento.
-  const atividadeId = Object.keys(atividades).find(id => atividades[id].titulo === titulo); 
-  
-  if (!atividadeId) return; // Se não encontrar a atividade, a função sai sem fazer nada (evita erros).
-  
-  const atividade = atividades[atividadeId]; // Recupera os detalhes da atividade atual (título, conteúdo e notas).
-  
-  const notaEsperada = atividade.notas[indiceNotaAtual]; // Pega a próxima nota esperada da sequência de notas da atividade.
-  
-  const notaDivs = document.querySelectorAll('#notas .nota'); // Seleciona todas as divs representando as notas no HTML.
-  
-  // Remove qualquer indicação visual de erro de todas as divs de notas, para evitar erros repetidos.
+  const titulo = document.getElementById('atividade-titulo').textContent;
+  const atividadeId = Object.keys(atividades).find(id => atividades[id].titulo === titulo);
+
+  if (!atividadeId) return;
+
+  const atividade = atividades[atividadeId];
+  const notaEsperada = atividade.notas[indiceNotaAtual];
+
+  const notaDivs = document.querySelectorAll('#notas .nota');
+
   notaDivs.forEach(div => div.classList.remove('nota-errada'));
 
-  if (notaPressionada === notaEsperada) { // Verifica se a nota pressionada é igual à nota esperada para a sequência.
-    // Se a nota estiver correta:
-    const div = notaDivs[indiceNotaAtual]; // Seleciona a div correspondente à nota esperada.
-    if (div) div.classList.add('nota-correta'); // Adiciona a classe 'nota-correta' para indicar que a nota foi pressionada corretamente.
-    
-    // Avança para a próxima nota na sequência, apenas após a nota ser correta.
+  if (notaPressionada === notaEsperada) {
+    const div = notaDivs[indiceNotaAtual];
+    if (div) div.classList.add('nota-correta');
+
     indiceNotaAtual++;
 
-    // Verifica se todas as notas da atividade foram tocadas corretamente.
     if (indiceNotaAtual >= atividade.notas.length) {
-      setTimeout(() => { // metodo pra dar uma acalmada
-      alert("Parabéns! Você completou a atividade! 🎉"); // Alerta o usuário quando todas as notas foram tocadas corretamente.
-      carregarProximaAtividade(); // Chama a função para carregar a próxima atividade.
-      }, 400); // 400ms para a ultima nota marcar correta antes do alert aparecer
-      return; // Impede que a função continue verificando após a atividade ser concluída.
+      setTimeout(() => {
+        // Adiciona a lógica para marcar a atividade como concluída
+        if (!progresso[atividade.instrumento].includes(atividadeId)) {
+          progresso[atividade.instrumento].push(atividadeId);
+          // Salva o progresso no localStorage
+          localStorage.setItem('progresso', JSON.stringify(progresso));
+        }
+        atualizarBarraProgresso(atividade.instrumento);
+
+        alert("Parabéns! Você completou a atividade! 🎉");
+        carregarProximaAtividade();
+      }, 400);
+      return;
     }
-  } else { // Se a nota pressionada for errada:
-    const divEsperada = notaDivs[indiceNotaAtual]; // Seleciona a div correspondente à nota que deveria ter sido tocada.
+  } else {
+    const divEsperada = notaDivs[indiceNotaAtual];
     if (divEsperada) {
-      divEsperada.classList.add('nota-errada'); // Adiciona a classe 'nota-errada' para indicar que a nota estava errada.
-      setTimeout(() => { // Remove o erro visual após 400 milissegundos, para não deixar o destaque por muito tempo.
+      divEsperada.classList.add('nota-errada');
+      setTimeout(() => {
         divEsperada.classList.remove('nota-errada');
       }, 400);
     }
@@ -320,69 +268,56 @@ function verificarSequencia(notaPressionada) {
 }
 
 function carregarProximaAtividade() {
-  // Obter o id da atividade atual diretamente
   const atividadeIdAtual = Object.keys(atividades).find(id => atividades[id].titulo === document.getElementById('atividade-titulo').textContent);
 
-  // Verificar se o id da atividade atual foi encontrado
   if (!atividadeIdAtual) {
     alert('Erro: Atividade não encontrada!');
     return;
   }
 
-  const proximaAtividadeId = obterProximaAtividadeId(atividadeIdAtual); // Passa o ID atual como parâmetro
+  const proximaAtividadeId = obterProximaAtividadeId(atividadeIdAtual);
 
   if (proximaAtividadeId) {
-    const proximaAtividade = atividades[proximaAtividadeId]; // Obtém os detalhes da próxima atividade
-    const instrumentoAtual = atividades[atividadeIdAtual].instrumento; // Pega o instrumento da atividade atual
-    const instrumentoProximaAtividade = proximaAtividade.instrumento; // Pega o instrumento da próxima atividade
+    const proximaAtividade = atividades[proximaAtividadeId];
+    const instrumentoAtual = atividades[atividadeIdAtual].instrumento;
+    const instrumentoProximaAtividade = proximaAtividade.instrumento;
 
-    // Verifica se o instrumento é o mesmo, caso contrário, não carrega a próxima atividade
     if (instrumentoAtual === instrumentoProximaAtividade) {
-      // Atualiza o título e outras informações para a nova atividade
       document.getElementById('atividade-titulo').textContent = proximaAtividade.titulo;
       document.getElementById('atividade-titulo').setAttribute('data-instrumento', instrumentoProximaAtividade);
 
-      // Reinicia o índice das notas
       indiceNotaAtual = 0;
 
-      // Limpa a tela de notas anteriores
       document.getElementById('notas').innerHTML = '';
       document.getElementById('notas-pressionadas').innerHTML = '';
 
-      // Atualiza as notas da nova atividade
-      atualizarNotas(proximaAtividade.notas); // Certifique-se de passar as notas corretas da próxima atividade
+      atualizarNotas(proximaAtividade.notas);
 
-      // Exibe o painel da nova atividade
       document.getElementById('atividade-container').style.display = 'block';
 
-      // Marca a atividade como concluída
-      atividadesConcluidas++; 
-    }
-    else { // Próxima atividade existe, mas é de outro instrumento
+    } else {
       alert("Você completou todas as atividades do " + instrumentoAtual + "! 🎉");
     }
   }
 }
 
-// Função para obter o ID da próxima atividade
 function obterProximaAtividadeId(atividadeIdAtual) {
   const atividadeIds = Object.keys(atividades);
   const indiceAtual = atividadeIds.indexOf(atividadeIdAtual);
 
-  // Verifica se há uma próxima atividade
   const proximaAtividadeId = (indiceAtual + 1 < atividadeIds.length) ? atividadeIds[indiceAtual + 1] : null;
 
-  return proximaAtividadeId; // Retorna o ID da próxima atividade ou null
+  return proximaAtividadeId;
 }
 
 function atualizarNotas(novasNotas) {
   const containerNotas = document.getElementById('notas');
-  containerNotas.innerHTML = ''; // Limpa as notas anteriores
-  indiceNotaAtual = 0; // Reinicia o índice
+  containerNotas.innerHTML = '';
+  indiceNotaAtual = 0;
 
   novasNotas.forEach((nota, index) => {
     const notaElement = document.createElement('div');
-    notaElement.classList.add('nota'); // Classe usada para o estilo de quadrado
+    notaElement.classList.add('nota');
     notaElement.textContent = nota;
     notaElement.setAttribute('data-nota', nota);
     notaElement.setAttribute('data-indice', index);
@@ -393,3 +328,26 @@ function atualizarNotas(novasNotas) {
 // Adiciona o ouvinte de eventos para capturar teclas pressionadas
 document.addEventListener('keydown', handleKeyPress);
 
+// Carrega as atividades do localStorage ao carregar a página
+window.addEventListener('load', function () {
+  for (let instrumento in progresso) {
+    atualizarBarraProgresso(instrumento);
+  }
+});
+
+function atualizarBarraProgresso(instrumento) {
+  const total = Object.values(atividades).filter(a => a.instrumento === instrumento).length;
+  const feitas = progresso[instrumento].length;
+
+  document.getElementById('progresso-texto').textContent =
+    `Progresso: ${feitas} de ${total} atividades concluídas`;
+
+  const barra = document.getElementById('barra-progresso');
+  const percentual = (feitas / total) * 100;
+  barra.style.width = percentual + '%';
+}
+
+function zerarProgresso() {
+  localStorage.removeItem('progresso');
+  location.reload();
+}

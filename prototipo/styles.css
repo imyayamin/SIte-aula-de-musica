@@ -355,4 +355,39 @@ nav h1 {
     overflow-y: auto;   /* Permite rolar quando as notas excedem a altura máxima */
   }
 
+  #progresso-container {
+    margin-bottom: 24px;
+  }
+  
+  #progresso-texto {
+    margin-bottom: 16px;
+    margin-top: 20px;
+  }  
+  
+  .progresso-barra-externa {
+    position: relative;
+    background: #eee;
+    width: 70%;
+    left: 14.5%;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  
+  #barra-progresso {
+    background: #4caf50;
+    width: 0%;
+    height: 100%;
+    transition: width 0.4s;
+  }
+
+  #btn-zerar-progresso {
+    font-size: 12px;      /* Tamanho da fonte menor */
+    padding: 3px 10px;    /* Menos espaço interno */
+    border-radius: 5px;   /* Cantos levemente arredondados */
+    height: 28px;         /* Altura menor */
+    min-width: 70px;      /* Largura mínima pequena */
+  }
+  
   
