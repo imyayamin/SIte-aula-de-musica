@@ -61,10 +61,7 @@ const atividades = {
     },
     5: {
       titulo: "Teclado - Parabéns pra você",
-      notas: [    "Dó", "Dó", "Ré", "Dó", "Fá", "Mi",
-        "Dó", "Dó", "Ré", "Dó", "Sol", "Fá",
-        "Lá", "Lá", "Dó", "Lá", "Fá", "Mi", "Ré",
-        "Lá", "Lá", "Sol", "Fá", "Sol", "Fá"],
+      notas: [    "Dó", "Dó", "Ré"],
       instrumento: "teclado",  // Atividade para teclado
     },
 
@@ -305,26 +302,23 @@ function verificarSequencia(notaPressionada) {
 
     // Verifica se todas as notas da atividade foram tocadas corretamente.
     if (indiceNotaAtual >= atividade.notas.length) {
+      setTimeout(() => { // metodo pra dar uma acalmada
       alert("Parabéns! Você completou a atividade! 🎉"); // Alerta o usuário quando todas as notas foram tocadas corretamente.
       carregarProximaAtividade(); // Chama a função para carregar a próxima atividade.
+      }, 400); // 400ms para a ultima nota marcar correta antes do alert aparecer
       return; // Impede que a função continue verificando após a atividade ser concluída.
     }
-  } else {
-    // Se a nota pressionada for errada:
+  } else { // Se a nota pressionada for errada:
     const divEsperada = notaDivs[indiceNotaAtual]; // Seleciona a div correspondente à nota que deveria ter sido tocada.
     if (divEsperada) {
       divEsperada.classList.add('nota-errada'); // Adiciona a classe 'nota-errada' para indicar que a nota estava errada.
-      
-      // Remove o erro visual após 400 milissegundos, para não deixar o destaque por muito tempo.
-      setTimeout(() => {
+      setTimeout(() => { // Remove o erro visual após 400 milissegundos, para não deixar o destaque por muito tempo.
         divEsperada.classList.remove('nota-errada');
       }, 400);
     }
   }
 }
 
-
-// Função para carregar a próxima atividade
 function carregarProximaAtividade() {
   // Obter o id da atividade atual diretamente
   const atividadeIdAtual = Object.keys(atividades).find(id => atividades[id].titulo === document.getElementById('atividade-titulo').textContent);
@@ -363,13 +357,10 @@ function carregarProximaAtividade() {
 
       // Marca a atividade como concluída
       atividadesConcluidas++; 
-
-      // essa parte não ta funcionando mas se pá é pq não tem progresso
-      // Atualiza a barra de progresso ou outro indicador de progresso
-      atualizarProgresso();
     }
-  } else {
-    alert("Você completou todas as atividades! 🎉");
+    else { // Próxima atividade existe, mas é de outro instrumento
+      alert("Você completou todas as atividades do " + instrumentoAtual + "! 🎉");
+    }
   }
 }
 
@@ -398,8 +389,6 @@ function atualizarNotas(novasNotas) {
     containerNotas.appendChild(notaElement);
   });
 }
-
-
 
 // Adiciona o ouvinte de eventos para capturar teclas pressionadas
 document.addEventListener('keydown', handleKeyPress);
