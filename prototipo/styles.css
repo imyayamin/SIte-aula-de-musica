@@ -268,6 +268,21 @@ nav h1 {
     gap: 10px;
 }
 
+.selecionar-atividades button.bloqueado {
+    opacity: 0.7; /* controla o quão "escuro" vai ficar*/
+    cursor: not-allowed;
+    position: relative;
+  }
+  
+  .selecionar-atividades button.bloqueado::after {
+    content: "🔒";
+    position: absolute;
+    right: 5px;
+    top: 2px;
+    font-size: 0.8em;
+  } 
+  
+
 #atividade-container {
     width: 60%;
     background-color: #fff;
