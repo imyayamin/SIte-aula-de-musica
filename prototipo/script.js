@@ -264,9 +264,6 @@ function mostrarAtividade(id) {
 
   // Atualiza a barra de progresso da atividade
   atualizarBarraProgresso(atividade.instrumento);
-
-  iniciarCronometro()
-
 }
 
 // Função que registra as notas pressionadas pelo usuário
@@ -352,7 +349,6 @@ function verificarSequencia(notaPressionada) {
         atualizarBarraProgresso(atividade.instrumento); // Atualiza a barra de progresso
 
         alert("Parabéns! Você completou a atividade! 🎉"); // Mostra uma mensagem de sucesso
-        pararCronometro();
         carregarProximaAtividade(); // Carrega a próxima atividade
       }, 400);
       return;
