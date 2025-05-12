@@ -6,17 +6,34 @@ function toggleMenu() {
 
 const tecladoNotas = {
   'a': 'Dó',
+  'z': 'Dó#',
   's': 'Ré',
+  'x': 'Ré#',
   'd': 'Mi',
   'f': 'Fá',
-  'g': 'Sol',
-  'h': 'Lá',
-  'j': 'Si',
-  'z': 'Dó#',
-  'x': 'Ré#',
   'v': 'Fá#',
+  'g': 'Sol',
   'b': 'Sol#',
+  'h': 'Lá',
   'm': 'Lá#',
+  'j': 'Si',
+  'k': 'Dó'// na oitava
+};
+
+const frequenciasNotas = {
+  a: 261.63,  // Dó (C4)
+  z: 277.18,  // Dó sustenido (C#4)
+  s: 293.66,  // Ré (D4)
+  x: 311.13,  // Ré sustenido (D#4)
+  d: 329.63,  // Mi (E4)
+  f: 349.23,  // Fá (F4)
+  v: 369.99,  // Fá sustenido (F#4)
+  g: 392.00,  // Sol (G4)
+  b: 415.30,  // Sol sustenido (G#4)
+  h: 440.00,  // Lá (A4)
+  m: 466.16,  // Lá sustenido (A#4)
+  j: 493.88,  // Si (B4)
+  k: 523.25   // Dó na oitava (C5)
 };
 
 const botoes = [
@@ -89,6 +106,50 @@ const atividades = {
     titulo: "Violoncelo - Escalas Completas", notas: ["Sol", "Lá", "Si", "Dó", "Ré", "Mi", "Fá", "Sol"], instrumento: "violoncelo",
   }
 };
+
+// Cria um novo contexto de áudio, que é a base para a criação de sons no navegador
+const contextoAudio = new (window.AudioContext || window.webkitAudioContext)();
+const sonsTocados = {}; // Um objeto para armazenar os osciladores e controlar os sons ativos
+
+function tocarNota(tecla) {
+  const frequencia = frequenciasNotas[tecla];// Obtém a frequência da nota correspondente à tecla pressionada, a partir de um objeto 'frequenciasNotas'
+
+  if (frequencia && !sonsTocados[tecla]) {  // Verifica se a frequência existe e se a tecla ainda não está sendo tocada
+    
+    const oscilador = contextoAudio.createOscillator();// Cria um oscilador, que é responsável por gerar a onda sonora
+    
+    const ganho = contextoAudio.createGain(); // Cria um objeto de ganho para controlar o volume do som
+    
+    oscilador.frequency.value = frequencia; // Define a frequência do oscilador para a frequência da nota
+    
+    oscilador.type = "sine"; // Define o tipo de onda gerada (sine, square, sawtooth ou triangle)
+    
+    oscilador.connect(ganho);// Conecta o oscilador ao objeto de ganho
+    
+    ganho.connect(contextoAudio.destination);// Conecta o objeto de ganho ao destino do áudio (o alto-falante do dispositivo)
+    
+    ganho.gain.setValueAtTime(0.2, contextoAudio.currentTime); // Define o volume do som para 0.2 (em uma escala de 0 a 1)
+
+    oscilador.start(); // Inicia o oscilador (faz o som começar)
+   
+    sonsTocados[tecla] = { oscilador, ganho }; // Armazena o oscilador e o ganho no objeto 'sonsTocados' para controle posterior
+  }
+}
+
+
+function pararNota(tecla) {
+  
+  const tocando = sonsTocados[tecla];// Verifica se a tecla está tocando (se já foi armazenada no objeto 'sonsTocados')
+  
+  if (tocando) {
+    
+    tocando.ganho.gain.exponentialRampToValueAtTime(0.001, contextoAudio.currentTime + 0.1); // Aplica um efeito de fade-out no volume da nota (diminui o volume suavemente até quase 0)
+    
+    tocando.oscilador.stop(contextoAudio.currentTime + 0.1); // Para o oscilador após o fade-out (parando o som)
+   
+    delete sonsTocados[tecla]; // Remove o oscilador e o ganho do objeto 'sonsTocados', sinalizando que a tecla parou de tocar
+  }
+}
 
 // Variável que armazena o índice da nota que está sendo tocada na atividade
 let indiceNotaAtual = 0; 
@@ -203,6 +264,9 @@ function mostrarAtividade(id) {
 
   // Atualiza a barra de progresso da atividade
   atualizarBarraProgresso(atividade.instrumento);
+
+  iniciarCronometro()
+
 }
 
 // Função que registra as notas pressionadas pelo usuário
@@ -288,6 +352,7 @@ function verificarSequencia(notaPressionada) {
         atualizarBarraProgresso(atividade.instrumento); // Atualiza a barra de progresso
 
         alert("Parabéns! Você completou a atividade! 🎉"); // Mostra uma mensagem de sucesso
+        pararCronometro();
         carregarProximaAtividade(); // Carrega a próxima atividade
       }, 400);
       return;
@@ -366,8 +431,35 @@ function atualizarNotas(novasNotas) {
   });
 }
 
-// Adiciona um ouvinte de evento que captura as teclas pressionadas pelo usuário
-document.addEventListener('keydown', handleKeyPress);
+// Adicionando uma flag para garantir que a tecla só será processada uma vez enquanto pressionada
+const teclasAtivas = {};
+
+// Função de pressionamento de tecla
+function handleKeyDown(event) {
+  const tecla = event.key.toLowerCase(); // Pega a tecla pressionada e a converte para minúscula
+  const nota = tecladoNotas[tecla]; // Verifica se a tecla pressionada corresponde a uma nota
+
+  if (nota && !teclasAtivas[tecla]) {  // Verifica se a tecla ainda não foi pressionada
+    teclasAtivas[tecla] = true; // Marca que a tecla está pressionada
+    tocarNota(tecla);  // Toca a nota
+    mostrarNota(nota); // Exibe a nota pressionada
+    verificarSequencia(nota);  // Verifica a sequência de notas
+    mostrarMonitor();  // Exibe o monitor de notas
+  }
+}
+
+// Função de soltura de tecla
+function handleKeyUp(event) {
+  const tecla = event.key.toLowerCase(); // Pega a tecla solta
+  if (teclasAtivas[tecla]) {  // Se a tecla estava pressionada
+    pararNota(tecla);  // Para a nota
+    teclasAtivas[tecla] = false;  // Marca que a tecla não está mais pressionada
+  }
+}
+
+// Adicionando os eventos de tecla
+window.addEventListener('keydown', handleKeyDown);
+window.addEventListener('keyup', handleKeyUp);
 
 // Ao carregar a página, atualiza as barras de progresso de todos os instrumentos
 window.addEventListener('load', function () {
@@ -393,4 +485,39 @@ function atualizarBarraProgresso(instrumento) {
 function zerarProgresso() {
   localStorage.removeItem('progresso'); // Remove os dados do progresso armazenados
   location.reload(); // Recarrega a página para reiniciar as atividades
+}
+
+function limparMonitor() {
+  const logDiv = document.getElementById('notas-pressionadas');
+  if (logDiv) { //verifica a existencia
+    logDiv.innerHTML = ''; // Apaga todo o conteúdo da div de uma vez
+  }
+}
+
+function reiniciarAtividade(){ 
+  location.reload();
+}
+
+//teste cronometro
+let intervaloCronometro;
+let tempoDecorrido = 0;
+
+function iniciarCronometro() {
+  pararCronometro(); // Parar qualquer anterior
+  tempoDecorrido = 0;
+  atualizarCronometro();
+  intervaloCronometro = setInterval(() => {
+    tempoDecorrido++;
+    atualizarCronometro();
+  }, 1000);
+}
+
+function pararCronometro() {
+  clearInterval(intervaloCronometro);
+}
+
+function atualizarCronometro() {
+  const minutos = Math.floor(tempoDecorrido / 60).toString().padStart(2, '0');
+  const segundos = (tempoDecorrido % 60).toString().padStart(2, '0');
+  document.getElementById('cronometro').textContent = `${minutos}:${segundos}`;
 }

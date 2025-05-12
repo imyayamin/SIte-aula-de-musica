@@ -44,6 +44,7 @@
         <div id="monitor">
           <p>Notas Pressionadas:</p>
           <div id="notas-pressionadas"></div>
+          <button id="btn-zerar-progresso" onclick="limparMonitor()">Limpar Monitor</button>
         </div>    
         <div id="progresso-container">
             <div id="progresso-texto">Progresso: 0 de 0 atividades concluídas</div>
@@ -51,8 +52,12 @@
               <div id="barra-progresso"></div>
             </div>
             <button id="btn-zerar-progresso" onclick="zerarProgresso()">Zerar Progresso</button>
+            <button id="btn-zerar-progresso" onclick="reiniciarAtividade()">Reiniciar Atividade</button>
+            <div id="cronometro">00:00</div>
           </div>          
-          </div>    
+          </div>  
+          
+  
     </div>
 
  
