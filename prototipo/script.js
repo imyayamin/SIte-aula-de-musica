@@ -411,6 +411,7 @@ function obterProximaAtividadeId(atividadeIdAtual) {
 
   // Se a próxima atividade existir, retorna o seu ID, caso contrário, retorna null
   const proximaAtividadeId = (indiceAtual + 1 < atividadeIds.length) ? atividadeIds[indiceAtual + 1] : null;
+  pararCronometro();
 
   return proximaAtividadeId;
 }
