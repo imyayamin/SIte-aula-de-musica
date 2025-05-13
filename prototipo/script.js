@@ -267,6 +267,8 @@ function mostrarAtividade(id) {
   // Exibe o container da atividade
   document.getElementById('atividade-container').style.display = 'block';
 
+  primeiraTeclaPressionada = false; 
+
   // Atualiza a barra de progresso da atividade
   atualizarBarraProgresso(atividade.instrumento);
 }
@@ -299,22 +301,6 @@ function rolarParaFinal() {
   logDiv.scrollTop = logDiv.scrollHeight; // Rola o log para o final
 }
 
-function handleKeyPress(event) {
-  const tecla = event.key.toLowerCase();
-  const nota = tecladoNotas[tecla];
-
-  if (nota) {
-    mostrarNota(nota);
-    verificarSequencia(nota);
-    
-    // Mostrar monitor apenas na primeira vez
-    if (!primeiraTeclaPressionada) {
-      mostrarMonitor();
-      iniciarCronometro();
-      primeiraTeclaPressionada = true;
-    }
-  }
-}
 
 // Função que exibe a nota pressionada na tela
 function mostrarNota(nota) {
@@ -420,7 +406,7 @@ function obterProximaAtividadeId(atividadeIdAtual) {
 
   // Se a próxima atividade existir, retorna o seu ID, caso contrário, retorna null
   const proximaAtividadeId = (indiceAtual + 1 < atividadeIds.length) ? atividadeIds[indiceAtual + 1] : null;
-  
+
   return proximaAtividadeId;
 }
 
@@ -455,6 +441,12 @@ function handleKeyDown(event) {
     verificarSequencia(nota);  // Verifica a sequência de notas
     mostrarMonitor();  // Exibe o monitor de notas
   }
+   // Iniciar o cronômetro na primeira tecla válida
+    if (!primeiraTeclaPressionada) {
+      mostrarMonitor();
+      iniciarCronometro();
+      primeiraTeclaPressionada = true;
+    }
 }
 
 
@@ -534,3 +526,10 @@ function iniciarCronometro() {
     document.getElementById("cronometro").textContent = formatarTempo(segundos);
   }, 1000);
 }
+function pararCronometro() {
+  clearInterval(cronometroInterval);
+  tempo = 0;
+  atualizarDisplayCronometro(tempo);
+  primeiraTeclaPressionada = false; // Reset para a próxima atividade
+}
+
