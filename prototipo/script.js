@@ -111,6 +111,8 @@ const atividades = {
 const contextoAudio = new (window.AudioContext || window.webkitAudioContext)();
 const sonsTocados = {}; // Um objeto para armazenar os osciladores e controlar os sons ativos
 
+let primeiraTeclaPressionada = false;
+
 function tocarNota(tecla) {
   const frequencia = frequenciasNotas[tecla];// Obtém a frequência da nota correspondente à tecla pressionada, a partir de um objeto 'frequenciasNotas'
 
@@ -233,6 +235,9 @@ function mostrarAtividade(id) {
   const atividade = atividades[id]; // Pega os dados da atividade
   if (!atividade) return; // Se não existir a atividade, sai da função
 
+  document.getElementById('monitor').style.display = 'none';
+  primeiraTeclaPressionada = false;
+
   indiceNotaAtual = 0; // Reseta o índice da nota atual
 
   // Atualiza o título e o conteúdo da atividade na página
@@ -294,16 +299,20 @@ function rolarParaFinal() {
   logDiv.scrollTop = logDiv.scrollHeight; // Rola o log para o final
 }
 
-// Função que lida com o evento de pressionamento de tecla no teclado
 function handleKeyPress(event) {
-  const tecla = event.key.toLowerCase(); // Pega a tecla pressionada e a converte para minúscula
-  const nota = tecladoNotas[tecla]; // Verifica se a tecla pressionada corresponde a uma nota
+  const tecla = event.key.toLowerCase();
+  const nota = tecladoNotas[tecla];
 
-  // Se a tecla pressionada corresponder a uma nota, chama as funções para mostrar a nota e verificar a sequência
   if (nota) {
     mostrarNota(nota);
     verificarSequencia(nota);
-    mostrarMonitor();
+    
+    // Mostrar monitor apenas na primeira vez
+    if (!primeiraTeclaPressionada) {
+      mostrarMonitor();
+      iniciarCronometro();
+      primeiraTeclaPressionada = true;
+    }
   }
 }
 
@@ -348,7 +357,8 @@ function verificarSequencia(notaPressionada) {
         }
         atualizarBarraProgresso(atividade.instrumento); // Atualiza a barra de progresso
 
-        alert("Parabéns! Você completou a atividade! 🎉"); // Mostra uma mensagem de sucesso
+        alert("Parabéns! Você completou a atividade em " + segundos +" segundos! 🎉"); // Mostra uma mensagem de sucesso
+ 
         carregarProximaAtividade(); // Carrega a próxima atividade
       }, 400);
       return;
@@ -394,6 +404,9 @@ function carregarProximaAtividade() {
       atualizarNotas(proximaAtividade.notas); // Atualiza as notas da próxima atividade
 
       document.getElementById('atividade-container').style.display = 'block'; // Exibe o container da atividade
+
+      document.getElementById('monitor').style.display = 'none'; // monitor sumir ao mudar ao mudar de atividade
+      primeiraTeclaPressionada = false;
     } else {
       alert("Você completou todas as atividades do " + instrumentoAtual + "! 🎉");
     }
@@ -407,8 +420,7 @@ function obterProximaAtividadeId(atividadeIdAtual) {
 
   // Se a próxima atividade existir, retorna o seu ID, caso contrário, retorna null
   const proximaAtividadeId = (indiceAtual + 1 < atividadeIds.length) ? atividadeIds[indiceAtual + 1] : null;
-  pararCronometro();
-
+  
   return proximaAtividadeId;
 }
 
@@ -445,6 +457,7 @@ function handleKeyDown(event) {
   }
 }
 
+
 // Função de soltura de tecla
 function handleKeyUp(event) {
   const tecla = event.key.toLowerCase(); // Pega a tecla solta
@@ -453,6 +466,7 @@ function handleKeyUp(event) {
     teclasAtivas[tecla] = false;  // Marca que a tecla não está mais pressionada
   }
 }
+
 
 // Adicionando os eventos de tecla
 window.addEventListener('keydown', handleKeyDown);
@@ -496,25 +510,27 @@ function reiniciarAtividade(){
 }
 
 //teste cronometro
-let intervaloCronometro;
-let tempoDecorrido = 0;
+let contador = null;
+let segundos = 0;
+
+function formatarTempo(segundos) {
+  const minutos = Math.floor(segundos / 60);
+  const segundosRestantes = segundos % 60;
+  return `${minutos}:${segundosRestantes.toString().padStart(2, '0')}`;
+}
 
 function iniciarCronometro() {
-  pararCronometro(); // Parar qualquer anterior
-  tempoDecorrido = 0;
-  atualizarCronometro();
-  intervaloCronometro = setInterval(() => {
-    tempoDecorrido++;
-    atualizarCronometro();
+  // Zera o tempo
+  segundos = 0;
+
+  // Para o cronômetro anterior (se existir)
+  if (contador) {
+    clearInterval(contador);
+  }
+
+  // Inicia novo cronômetro
+  contador = setInterval(() => {
+    segundos++;
+    document.getElementById("cronometro").textContent = formatarTempo(segundos);
   }, 1000);
-}
-
-function pararCronometro() {
-  clearInterval(intervaloCronometro);
-}
-
-function atualizarCronometro() {
-  const minutos = Math.floor(tempoDecorrido / 60).toString().padStart(2, '0');
-  const segundos = (tempoDecorrido % 60).toString().padStart(2, '0');
-  document.getElementById('cronometro').textContent = `${minutos}:${segundos}`;
 }
