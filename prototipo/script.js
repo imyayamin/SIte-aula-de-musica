@@ -501,35 +501,3 @@ function reiniciarAtividade(){
   location.reload();
 }
 
-//teste cronometro
-let contador = null;
-let segundos = 0;
-
-function formatarTempo(segundos) {
-  const minutos = Math.floor(segundos / 60);
-  const segundosRestantes = segundos % 60;
-  return `${minutos}:${segundosRestantes.toString().padStart(2, '0')}`;
-}
-
-function iniciarCronometro() {
-  // Zera o tempo
-  segundos = 0;
-
-  // Para o cronômetro anterior (se existir)
-  if (contador) {
-    clearInterval(contador);
-  }
-
-  // Inicia novo cronômetro
-  contador = setInterval(() => {
-    segundos++;
-    document.getElementById("cronometro").textContent = formatarTempo(segundos);
-  }, 1000);
-}
-function pararCronometro() {
-  clearInterval(cronometroInterval);
-  tempo = 0;
-  atualizarDisplayCronometro(tempo);
-  primeiraTeclaPressionada = false; // Reset para a próxima atividade
-}
-
