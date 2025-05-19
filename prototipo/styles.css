@@ -455,10 +455,3 @@ button[type="submit"] {
   cursor: pointer;
   font-weight: bold;
 }
-
-
-/* Link dos termos */
-a {
-  color: #7e43f1;
-  text-decoration: underline;
-}
