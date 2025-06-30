@@ -335,18 +335,22 @@ function verificarSequencia(notaPressionada) {
     // Se todas as notas foram tocadas corretamente, marca a atividade como concluída
     if (indiceNotaAtual >= atividade.notas.length) {
       setTimeout(() => {
-        // Se a atividade ainda não foi marcada como concluída, marca ela
         if (!progresso[atividade.instrumento].includes(atividadeId)) {
           progresso[atividade.instrumento].push(atividadeId);
-          localStorage.setItem('progresso', JSON.stringify(progresso)); // Salva o progresso no localStorage
-          reativarBotoes(atividade.instrumento); // Reativa os botões de atividades do instrumento
+          localStorage.setItem('progresso', JSON.stringify(progresso));
+          reativarBotoes(atividade.instrumento);
         }
-        atualizarBarraProgresso(atividade.instrumento); // Atualiza a barra de progresso
-
-        alert("Parabéns! Você completou a atividade em " + segundos +" segundos! 🎉"); // Mostra uma mensagem de sucesso
- 
-        carregarProximaAtividade(); // Carrega a próxima atividade
+      
+        atualizarBarraProgresso(atividade.instrumento);
+      
+        alert("Parabéns! Você completou a atividade!🎉");
+      
+        // Aguarda um pequeno tempo depois do alerta para carregar a próxima
+        setTimeout(() => {
+          carregarProximaAtividade();
+        }, 200); // pode ajustar o tempo se quiser
       }, 400);
+      
       return;
     }
   } else {
@@ -363,41 +367,41 @@ function verificarSequencia(notaPressionada) {
 
 // Função que carrega a próxima atividade, caso exista
 function carregarProximaAtividade() {
-  const atividadeIdAtual = Object.keys(atividades).find(id => atividades[id].titulo === document.getElementById('atividade-titulo').textContent);
+  const tituloAtual = document.getElementById('atividade-titulo').textContent;
+  const atividadeIdAtual = Object.keys(atividades).find(id => atividades[id].titulo === tituloAtual);
 
   if (!atividadeIdAtual) {
-    alert('Erro: Atividade não encontrada!'); // Caso não encontre a atividade, mostra um erro
+    alert('Erro: Atividade não encontrada!');
     return;
   }
 
-  const proximaAtividadeId = obterProximaAtividadeId(atividadeIdAtual); // Pega o ID da próxima atividade
+  const indiceAtual = botoes.findIndex(id => id.toString() === atividadeIdAtual.toString());
+  if (indiceAtual === -1) {
+    alert('Erro: Atividade atual não encontrada na lista!');
+    return;
+  }
 
-  if (proximaAtividadeId) {
-    const proximaAtividade = atividades[proximaAtividadeId]; // Pega os dados da próxima atividade
-    const instrumentoAtual = atividades[atividadeIdAtual].instrumento; // Pega o instrumento da atividade atual
-    const instrumentoProximaAtividade = proximaAtividade.instrumento; // Pega o instrumento da próxima atividade
+  const instrumentoAtual = atividades[atividadeIdAtual].instrumento;
 
-    // Se a próxima atividade for do mesmo instrumento, exibe ela
-    if (instrumentoAtual === instrumentoProximaAtividade) {
-      document.getElementById('atividade-titulo').textContent = proximaAtividade.titulo;
-      document.getElementById('atividade-titulo').setAttribute('data-instrumento', instrumentoProximaAtividade);
-
-      indiceNotaAtual = 0; // Reseta o índice da nota atual
-
-      document.getElementById('notas').innerHTML = ''; // Limpa as notas na tela
-      document.getElementById('notas-pressionadas').innerHTML = ''; // Limpa as notas pressionadas na tela
-
-      atualizarNotas(proximaAtividade.notas); // Atualiza as notas da próxima atividade
-
-      document.getElementById('atividade-container').style.display = 'block'; // Exibe o container da atividade
-
-      document.getElementById('monitor').style.display = 'none'; // monitor sumir ao mudar ao mudar de atividade
-      primeiraTeclaPressionada = false;
-    } else {
-      alert("Você completou todas as atividades do " + instrumentoAtual + "! 🎉");
+  // Procura a próxima atividade do mesmo instrumento
+  let proximoId = null;
+  for (let i = indiceAtual + 1; i < botoes.length; i++) {
+    const id = botoes[i].toString();
+    if (atividades[id] && atividades[id].instrumento === instrumentoAtual) {
+      proximoId = id;
+      break;
     }
   }
+
+  if (proximoId) {
+    mostrarAtividade(proximoId);
+  } else {
+    alert('Você concluiu todas as atividades deste instrumento!');
+    document.getElementById('atividade-container').style.display = 'none';
+  }
 }
+
+
 
 // Função que obtém o ID da próxima atividade
 function obterProximaAtividadeId(atividadeIdAtual) {
