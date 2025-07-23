@@ -32,6 +32,31 @@ main {
     position: absolute;
     left: 80px;
 }
+/* TRANSIÇÃO */
+    #primeira-pagina {
+      transition: opacity 1s ease;
+      opacity: 1;
+    }
+
+    #primeira-pagina.fade-out {
+      opacity: 0;
+    }
+
+    #instrumentos {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 6s ease;
+    }
+
+    #instrumentos.visible {
+    opacity: 1;
+    pointer-events: auto;
+    }
+
+
+    #instrumentos h1 {
+      font-size: 50px;
+    }
 
 button {
     padding: 30px 50px;

@@ -4,6 +4,17 @@ function toggleMenu() {
   menu.style.display = (menu.style.display === "block") ? "none" : "block";
 }
 
+// Event listeners
+document.getElementById('botao-comecar').addEventListener('click', function() {
+  const primeiraPagina = document.getElementById('primeira-pagina');
+  const instrumentos = document.getElementById('instrumentos');
+  primeiraPagina.classList.add('fade-out');
+  instrumentos.classList.add('visible');
+ setTimeout(() => {
+  primeiraPagina.style.display = 'none';
+}, 1000) // tempo igual ao da transição
+});
+
 const tecladoNotas = {
   'a': 'Dó',
   'z': 'Dó#',
