@@ -60,6 +60,66 @@ function toggleMenu() {
   menu.style.display = (menu.style.display === "block") ? "none" : "block";
 }
 
+
+// Integração MIDI - teste
+if (navigator.requestMIDIAccess) {
+  navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
+} else {
+  console.warn("Web MIDI API não suportada neste navegador.");
+}
+
+function onMIDISuccess(midiAccess) {
+  for (let input of midiAccess.inputs.values()) {
+    input.onmidimessage = handleMIDIMessage;
+  }
+}
+
+function onMIDIFailure() {
+  console.warn("Não foi possível acessar dispositivos MIDI.");
+  //alert("Não foi possível acessar dispositivos MIDI.");
+}
+
+function handleMIDIMessage(event) {
+  const [status, note, velocity] = event.data;
+  // status 144 = note on, 128 = note off
+  if (status === 144 && velocity > 0) { // Note ON
+    const tecla = midiNoteToNome(note);
+    const nota = tecladoNotas[tecla];
+    if (nota) {
+      tocarNota(tecla);
+      mostrarNota(nota);
+      verificarSequencia(nota);
+      mostrarMonitor();
+    }
+  } else if (status === 128 || (status === 144 && velocity === 0)) { // Note OFF
+    const tecla = midiNoteToNome(note);
+    if (tecla) {
+      pararNota(tecla);
+    }
+  }
+}
+
+// Mapeamento das notas MIDI para teclas do seu sistema
+function midiNoteToNome(midiNote) {
+  const mapa = {
+    60: 'a', // Dó
+    61: 'z', // Dó#
+    62: 's', // Ré
+    63: 'x', // Ré#
+    64: 'd', // Mi
+    65: 'f', // Fá
+    66: 'v', // Fá#
+    67: 'g', // Sol
+    68: 'b', // Sol#
+    69: 'h', // Lá
+    70: 'm', // Lá#
+    71: 'j', // Si
+    72: 'k'  // Dó (oitava acima)
+  };
+  return mapa[midiNote];
+}
+// fim do teste do MIDI
+
 const tecladoNotas = {
   'a': 'Dó',
   'z': 'Dó#',
@@ -504,7 +564,6 @@ function handleKeyDown(event) {
    // Iniciar o cronômetro na primeira tecla válida
     if (!primeiraTeclaPressionada) {
       mostrarMonitor();
-      iniciarCronometro();
       primeiraTeclaPressionada = true;
     }
 }
