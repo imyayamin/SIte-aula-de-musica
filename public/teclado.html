@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>música ao alcance de todos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="header"></div>
+    
+    <div class="pagina">
+        <h1>Teclado</h1>
+        <div class="selecionar-atividades">
+        <button class="atividade-botao" data-id="1">1</button>
+        <button class="atividade-botao" data-id="2">2</button>
+        <button class="atividade-botao" data-id="3">3</button>
+        <button class="atividade-botao" data-id="4">4</button>
+        <button class="atividade-botao" data-id="5">5</button>
+    </div>
+
+    </div>
+
+    <div id="atividade-container" class="atividade-container" style="display: none;">
+        <h2 id="atividade-titulo"></h2>
+        <p id="atividade-conteudo"></p>
+        <div id="notas"></div>
+        <div id="feedback"></div> <!-- Área de feedback do usuário -->
+        <div id="monitor">
+          <p>Notas Pressionadas:</p>
+          <div id="notas-pressionadas"></div>
+          <button id="btn-zerar-progresso" onclick="limparMonitor()">Limpar Monitor</button>
+        </div>    
+        <div id="progresso-container">
+            <div id="progresso-texto">Progresso: 0 de 0 atividades concluídas</div>
+            <div class="progresso-barra-externa">
+              <div id="barra-progresso"></div>
+            </div>
+            <button id="btn-zerar-progresso" onclick="zerarProgresso()">Zerar Progresso</button>
+            <button id="btn-zerar-progresso" onclick="reiniciarAtividade()">Reiniciar Atividade</button>
+          </div>  
+          </div>  
+          
+    
+  
+    </div>
+
+ 
+    <script src="script.js"></script>
+</body>
+</html>
