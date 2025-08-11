@@ -4,6 +4,18 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.text())
         .then(data => {
             document.getElementById('header').innerHTML = data;
+            window.addEventListener('DOMContentLoaded', function() {
+              const usuario = JSON.parse(localStorage.getItem('usuario'));
+              if (usuario && usuario.nome) {
+                document.getElementById('usuario-logado').textContent = `Olá, ${usuario.nome}`;
+              }
+            });
+
+            document.getElementById('logout').addEventListener('click', function() {
+              localStorage.removeItem('usuario');
+              localStorage.removeItem('progresso');
+              window.location.href = 'login.html';
+            });
         });
 
     const cadastroForm = document.getElementById('cadastroForm');
@@ -35,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const email = document.getElementById('email').value;
-            const senha = document.getElementById('senha').value;
+            const senha = document.querySelector('[name="senha"]').value;
             fetch('/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -44,6 +56,8 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(res => res.json())
             .then(data => {
                 if (data.sucesso) {
+                    localStorage.setItem('usuario', JSON.stringify({ nome: data.nome, email }));
+                    localStorage.setItem('progresso', JSON.stringify(data.progresso));
                     alert('Login realizado com sucesso!');
                     window.location.href = 'index.html';
                 } else {
@@ -454,8 +468,22 @@ function verificarSequencia(notaPressionada) {
         if (!progresso[atividade.instrumento].includes(atividadeId)) {
           progresso[atividade.instrumento].push(atividadeId);
           localStorage.setItem('progresso', JSON.stringify(progresso));
-          reativarBotoes(atividade.instrumento);
+
+          // Envia o progresso atualizado para o backend
+          const usuario = JSON.parse(localStorage.getItem('usuario'));
+          if (usuario && usuario.email) {
+            fetch('/api/progresso', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: usuario.email,
+              progresso
+            })
+          });
         }
+
+        reativarBotoes(atividade.instrumento);
+      }
       
         atualizarBarraProgresso(atividade.instrumento);
       
@@ -561,7 +589,8 @@ function handleKeyDown(event) {
     verificarSequencia(nota);  // Verifica a sequência de notas
     mostrarMonitor();  // Exibe o monitor de notas
   }
-   // Iniciar o cronômetro na primeira tecla válida
+   // Iniciar o cronôm
+   
     if (!primeiraTeclaPressionada) {
       mostrarMonitor();
       primeiraTeclaPressionada = true;
