@@ -467,6 +467,7 @@ function verificarSequencia(notaPressionada) {
       setTimeout(() => {
         if (!progresso[atividade.instrumento].includes(atividadeId)) {
           progresso[atividade.instrumento].push(atividadeId);
+
           localStorage.setItem('progresso', JSON.stringify(progresso));
 
           // Envia o progresso atualizado para o backend
@@ -480,6 +481,7 @@ function verificarSequencia(notaPressionada) {
               progresso
             })
           });
+
         }
 
         reativarBotoes(atividade.instrumento);
