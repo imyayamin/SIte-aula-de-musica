@@ -18,14 +18,14 @@ p {
     font-size: 18px;
 }
 
-a.sem-cor {
-    color: #dfdfdf; /* Faz com que a cor do link herde a cor do texto ao redor */
+a {
+    color: #000000; /* Faz com que a cor do link herde a cor do texto ao redor */
     text-decoration: none; /* Remove o sublinhado padrão */
 }
 
-a.sem-cor:hover {
-    color: #dfdfdf; /* Mantém a cor igual ao texto ao redor */
-    text-decoration: none; /* Remove o sublinhado no hover */
+.criadores {
+    position: absolute;
+    left: 5%;
 }
 
 main {
@@ -94,6 +94,13 @@ nav h1 {
     height: 40px;
     object-fit: contain;
     border-radius: 5px;
+}
+.casa {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .dropdown {
