@@ -74,6 +74,11 @@ function toggleMenu() {
   menu.style.display = (menu.style.display === "block") ? "none" : "block";
 }
 
+// Função para voltar ao inicio
+function voltarInicio() {
+ window.location.href = 'index.html';
+}
+
 
 // Integração MIDI - teste
 if (navigator.requestMIDIAccess) {
