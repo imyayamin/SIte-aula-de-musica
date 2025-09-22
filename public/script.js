@@ -100,21 +100,29 @@ function onMIDIFailure() {
 
 function handleMIDIMessage(event) {
   const [status, note, velocity] = event.data;
-  // status 144 = note on, 128 = note off
+  // Função auxiliar para buscar a nota na matrizBotoesMIDI
+  function buscarNotaPorMidi(midiNumber) {
+    for (let linha of matrizBotoesMIDI) {
+      for (let botao of linha) {
+        if (botao.midi === midiNumber) {
+          return botao.nota;
+        }
+      }
+    }
+    return null;
+  }
+
   if (status === 144 && velocity > 0) { // Note ON
-    const tecla = midiNoteToNome(note);
-    const nota = tecladoNotas[tecla];
+    const nota = buscarNotaPorMidi(note);
     if (nota) {
-      tocarNota(tecla);
       mostrarNota(nota);
       verificarSequencia(nota);
       mostrarMonitor();
     }
+    // Se quiser tocar o som, pode mapear para uma tecla se desejar
+    // Exemplo: tocarNota(tecla) se houver mapeamento
   } else if (status === 128 || (status === 144 && velocity === 0)) { // Note OFF
-    const tecla = midiNoteToNome(note);
-    if (tecla) {
-      pararNota(tecla);
-    }
+    // Não faz nada, mas pode implementar lógica se desejar
   }
 }
 
@@ -135,8 +143,40 @@ function midiNoteToNome(midiNote) {
     71: 'j', // Si
     72: 'k'  // Dó (oitava acima)
   };
+
   return mapa[midiNote];
 }
+// Matriz 4x5 para botões MIDI (cada valor representa uma nota MIDI)
+const matrizBotoesMIDI = [
+  [
+    { midi: 60, nota: 'Dó' },
+    { midi: 61, nota: 'Dó#' },
+    { midi: 62, nota: 'Ré' },
+    { midi: 63, nota: 'Ré#' },
+    { midi: 64, nota: 'Mi' }
+  ], // Linha 1
+  [
+    { midi: 65, nota: 'Fá' },
+    { midi: 66, nota: 'Fá#' },
+    { midi: 67, nota: 'Sol' },
+    { midi: 68, nota: 'Sol#' },
+    { midi: 69, nota: 'Lá' }
+  ], // Linha 2
+  [
+    { midi: 70, nota: 'Lá#' },
+    { midi: 71, nota: 'Si' },
+    { midi: 72, nota: 'Dó (oitava acima)' },
+    { midi: 73, nota: 'Dó# (oitava acima)' },
+    { midi: 74, nota: 'Ré (oitava acima)' }
+  ], // Linha 3
+  [
+    { midi: 75, nota: 'Ré# (oitava acima)' },
+    { midi: 76, nota: 'Mi (oitava acima)' },
+    { midi: 77, nota: 'Fá (oitava acima)' },
+    { midi: 78, nota: 'Fá# (oitava acima)' },
+    { midi: 79, nota: 'Sol (oitava acima)' }
+  ] // Linha 4
+];
 // fim do teste do MIDI
 
 const tecladoNotas = {
