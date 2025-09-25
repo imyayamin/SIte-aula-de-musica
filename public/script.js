@@ -127,25 +127,7 @@ function handleMIDIMessage(event) {
 }
 
 // Mapeamento das notas MIDI para teclas do seu sistema
-function midiNoteToNome(midiNote) {
-  const mapa = {
-    60: 'a', // Dó
-    61: 'z', // Dó#
-    62: 's', // Ré
-    63: 'x', // Ré#
-    64: 'd', // Mi
-    65: 'f', // Fá
-    66: 'v', // Fá#
-    67: 'g', // Sol
-    68: 'b', // Sol#
-    69: 'h', // Lá
-    70: 'm', // Lá#
-    71: 'j', // Si
-    72: 'k'  // Dó (oitava acima)
-  };
 
-  return mapa[midiNote];
-}
 // Matriz 4x5 para botões MIDI (cada valor representa uma nota MIDI)
 const matrizBotoesMIDI = [
   [
@@ -153,63 +135,27 @@ const matrizBotoesMIDI = [
     { midi: 61, nota: 'Dó#' },
     { midi: 62, nota: 'Ré' },
     { midi: 63, nota: 'Ré#' },
-    { midi: 64, nota: 'Mi' }
   ], // Linha 1
   [
+    { midi: 64, nota: 'Mi' },
     { midi: 65, nota: 'Fá' },
     { midi: 66, nota: 'Fá#' },
     { midi: 67, nota: 'Sol' },
-    { midi: 68, nota: 'Sol#' },
-    { midi: 69, nota: 'Lá' }
   ], // Linha 2
   [
+    { midi: 68, nota: 'Sol#' },
+    { midi: 69, nota: 'Lá' },
     { midi: 70, nota: 'Lá#' },
     { midi: 71, nota: 'Si' },
-    { midi: 72, nota: 'Dó (oitava acima)' },
-    { midi: 73, nota: 'Dó# (oitava acima)' },
-    { midi: 74, nota: 'Ré (oitava acima)' }
   ], // Linha 3
   [
+    { midi: 72, nota: 'Dó (oitava acima)' },
+    { midi: 73, nota: 'Dó# (oitava acima)' },
+    { midi: 74, nota: 'Ré (oitava acima)' },
     { midi: 75, nota: 'Ré# (oitava acima)' },
-    { midi: 76, nota: 'Mi (oitava acima)' },
-    { midi: 77, nota: 'Fá (oitava acima)' },
-    { midi: 78, nota: 'Fá# (oitava acima)' },
-    { midi: 79, nota: 'Sol (oitava acima)' }
   ] // Linha 4
 ];
 // fim do teste do MIDI
-
-const tecladoNotas = {
-  'a': 'Dó',
-  'z': 'Dó#',
-  's': 'Ré',
-  'x': 'Ré#',
-  'd': 'Mi',
-  'f': 'Fá',
-  'v': 'Fá#',
-  'g': 'Sol',
-  'b': 'Sol#',
-  'h': 'Lá',
-  'm': 'Lá#',
-  'j': 'Si',
-  'k': 'Dó'// na oitava
-};
-
-const frequenciasNotas = {
-  a: 261.63,  // Dó (C4)
-  z: 277.18,  // Dó sustenido (C#4)
-  s: 293.66,  // Ré (D4)
-  x: 311.13,  // Ré sustenido (D#4)
-  d: 329.63,  // Mi (E4)
-  f: 349.23,  // Fá (F4)
-  v: 369.99,  // Fá sustenido (F#4)
-  g: 392.00,  // Sol (G4)
-  b: 415.30,  // Sol sustenido (G#4)
-  h: 440.00,  // Lá (A4)
-  m: 466.16,  // Lá sustenido (A#4)
-  j: 493.88,  // Si (B4)
-  k: 523.25   // Dó na oitava (C5)
-};
 
 const botoes = [
   '1', '2', '3', '4', '5',
@@ -220,65 +166,104 @@ const botoes = [
 
 const atividades = {
   1: {
-    titulo: "Teclado - Escalas", notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si", "Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si", "Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"], instrumento: "teclado",
+    titulo: "Teclado - Escalas",
+    notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si", "Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si", "Dó"],
+    instrumento: "teclado",
   },
   2: {
-    titulo: "Teclado - Acordes", notas: ["Dó", "Mi", "Sol"], instrumento: "teclado",
+    titulo: "Teclado - Acordes", 
+    notas: ["Dó", "Mi", "Sol"], 
+    instrumento: "teclado",
   },
   3: {
-    titulo: "Teclado - Do-Re-Mi", notas: ["Dó", "Dó", "Ré", "Mi", "Mi", "Fá", "Fá#", "Sol", "Sol", "Sol", "Lá", "Si", "Si", "Dó", "Dó", "Dó", "Ré", "Mi", "Fá", "Fá#", "Sol", "Fá#", "Mi", "Ré", "Dó"], instrumento: "teclado",
+    titulo: "Teclado - Do-Re-Mi", 
+    notas: ["Dó", "Dó", "Ré", "Mi", "Mi", "Fá", "Fá#", "Sol", "Sol", "Sol", "Lá", "Si", "Si", "Dó", "Dó", "Dó", "Ré", "Mi", "Fá", "Fá#", "Sol", "Fá#", "Mi", "Ré", "Dó"], 
+    instrumento: "teclado",
   },
   4: {
     titulo: "Teclado - Cucaracha",
-    notas: ["Sol", "Sol", "Lá", "Sol", "Dó", "Si", "Sol", "Sol", "Lá", "Sol", "Dó", "Si", "Sol", "Sol", "Lá", "Sol", "Dó", "Si", "Sol", "Fá#", "Mi"], instrumento: "teclado",
+    notas: ["Sol", "Sol", "Lá", "Sol", "Dó", "Si", "Sol", "Sol", "Lá", "Sol", "Dó", "Si", "Sol", "Sol", "Lá", "Sol", "Dó", "Si", "Sol", "Fá#", "Mi"], 
+    instrumento: "teclado",
   },
   5: {
-    titulo: "Teclado - Parabéns pra você", notas: ["Dó", "Dó", "Ré"], instrumento: "teclado",
+    titulo: "Teclado - Parabéns pra você", 
+    notas: ["Dó", "Dó", "Ré"], 
+    instrumento: "teclado",
   },
   201: {
-    titulo: "Piano - Escalas", notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"], instrumento: "piano",
+    titulo: "Piano - Escalas", 
+    notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"], 
+    instrumento: "piano",
   },
   202: {
-    titulo: "Piano - Acordes", notas: ["Dó", "Fá", "Sol"], instrumento: "piano",
+    titulo: "Piano - Acordes", 
+    notas: ["Dó", "Fá", "Sol"], 
+    instrumento: "piano",
   },
   203: {
-    titulo: "Piano - Mão Direita", notas: ["Mi", "Fá", "Sol"], instrumento: "piano",
+    titulo: "Piano - Mão Direita", 
+    notas: ["Mi", "Fá", "Sol"], 
+    instrumento: "piano",
   },
   204: {
-    titulo: "Piano - Mão Esquerda", notas: ["Dó", "Mi", "Sol"], instrumento: "piano",
+    titulo: "Piano - Mão Esquerda", 
+    notas: ["Dó", "Mi", "Sol"], 
+    instrumento: "piano",
   },
   205: {
-    titulo: "Piano - Melodia Simples", notas: ["Dó", "Dó", "Sol", "Sol", "Lá", "Lá", "Sol"], instrumento: "piano",
+    titulo: "Piano - Melodia Simples", 
+    notas: ["Dó", "Dó", "Sol", "Sol", "Lá", "Lá", "Sol"], 
+    instrumento: "piano",
   },
   401: {
-    titulo: "Acordeão - Escalas", notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"], instrumento: "acordeão",
+    titulo: "Acordeão - Escalas", 
+    notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"], 
+    instrumento: "acordeão",
   },
   402: {
-    titulo: "Acordeão - Acordes", notas: ["Dó", "Fá", "Sol"], instrumento: "acordeão",
+    titulo: "Acordeão - Acordes", 
+    notas: ["Dó", "Fá", "Sol"], 
+    instrumento: "acordeão",
   },
   403: {
-    titulo: "Acordeão - Mão Direita", notas: ["Mi", "Fá", "Sol"], instrumento: "acordeão",
+    titulo: "Acordeão - Mão Direita", 
+    notas: ["Mi", "Fá", "Sol"], 
+    instrumento: "acordeão",
   },
   404: {
-    titulo: "Acordeão - Mão Esquerda", notas: ["Dó", "Sol"], instrumento: "acordeão",
+    titulo: "Acordeão - Mão Esquerda", 
+    notas: ["Dó", "Sol"], 
+    instrumento: "acordeão",
   },
   405: {
-    titulo: "Acordeão - Pequena música", notas: ["Dó", "Mi", "Sol", "Fá", "Mi", "Dó"], instrumento: "acordeão",
+    titulo: "Acordeão - Pequena música", 
+    notas: ["Dó", "Mi", "Sol", "Fá", "Mi", "Dó"], 
+    instrumento: "acordeão",
   },
   601: {
-    titulo: "Violoncelo - Corda Sol", notas: ["Sol", "Lá", "Si", "Dó"], instrumento: "violoncelo",
+    titulo: "Violoncelo - Corda Sol", 
+    notas: ["Sol", "Lá", "Si", "Dó"], 
+    instrumento: "violoncelo",
   },
   602: {
-    titulo: "Violoncelo - Corda Ré", notas: ["Ré", "Mi", "Fá#", "Sol"], instrumento: "violoncelo",
+    titulo: "Violoncelo - Corda Ré", 
+    notas: ["Ré", "Mi", "Fá#", "Sol"], 
+    instrumento: "violoncelo",
   },
   603: {
-    titulo: "Violoncelo - Corda Lá", notas: ["Lá", "Si", "Dó#", "Ré"], instrumento: "violoncelo",
+    titulo: "Violoncelo - Corda Lá", 
+    notas: ["Lá", "Si", "Dó#", "Ré"], 
+    instrumento: "violoncelo",
   },
   604: {
-    titulo: "Violoncelo - Corda Dó", notas: ["Dó", "Ré", "Mi", "Fá"], instrumento: "violoncelo",
+    titulo: "Violoncelo - Corda Dó", 
+    notas: ["Dó", "Ré", "Mi", "Fá"], 
+    instrumento: "violoncelo",
   },
   605: {
-    titulo: "Violoncelo - Escalas Completas", notas: ["Sol", "Lá", "Si", "Dó", "Ré", "Mi", "Fá", "Sol"], instrumento: "violoncelo",
+    titulo: "Violoncelo - Escalas Completas", 
+    notas: ["Sol", "Lá", "Si", "Dó", "Ré", "Mi", "Fá", "Sol"], 
+    instrumento: "violoncelo",
   }
 };
 
@@ -332,12 +317,12 @@ function pararNota(tecla) {
 let indiceNotaAtual = 0; 
 
 // A variável 'progresso' armazena os dados do progresso do usuário, carregando informações do 'localStorage' se existir, caso contrário, define um valor padrão.
-let progresso = JSON.parse(localStorage.getItem('progresso')) || {
-  teclado: [],
-  piano: [],
-  acordeão: [],
-  violoncelo: []
-};
+// Progresso individual por usuário
+let usuarioAtual = JSON.parse(localStorage.getItem('usuario'));
+let progresso = { teclado: [], piano: [], acordeão: [], violoncelo: [] };
+if (usuarioAtual && usuarioAtual.email) {
+  progresso = JSON.parse(localStorage.getItem('progresso_' + usuarioAtual.email)) || progresso;
+}
 
 // Aqui estamos criando dois conjuntos (Sets) que serão usados para verificar as atividades do usuário.
 const primeirosIds = new Set(); // Para armazenar os primeiros IDs de cada instrumento
@@ -512,22 +497,19 @@ function verificarSequencia(notaPressionada) {
       setTimeout(() => {
         if (!progresso[atividade.instrumento].includes(atividadeId)) {
           progresso[atividade.instrumento].push(atividadeId);
-
-          localStorage.setItem('progresso', JSON.stringify(progresso));
-
-          // Envia o progresso atualizado para o backend
-          const usuario = JSON.parse(localStorage.getItem('usuario'));
-          if (usuario && usuario.email) {
+          // Salva progresso individual por usuário
+          if (usuarioAtual && usuarioAtual.email) {
+            localStorage.setItem('progresso_' + usuarioAtual.email, JSON.stringify(progresso));
+            // Envia o progresso atualizado para o backend
             fetch('/api/progresso', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              email: usuario.email,
-              progresso
-            })
-          });
-
-        }
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                email: usuarioAtual.email,
+                progresso
+              })
+            });
+          }
 
         reativarBotoes(atividade.instrumento);
       }
