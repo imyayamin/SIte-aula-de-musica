@@ -40,8 +40,8 @@ a:hover {
 }
 
 main {
-    position: absolute;
-    left: 80px;
+    position: static; /* ou remova esta linha */
+    left: unset;      /* ou remova esta linha */
     margin: 0 auto;
     max-width: 700px;
     width: 100%;
@@ -649,4 +649,35 @@ button[type="submit"] {
     h1 {
         font-size: 1.5rem;
     }
+}
+
+#body-vst-config {
+    display: block; /* ou remova o display:flex */
+    overflow-y: auto; /* permite scroll se precisar */
+}
+.vst-config-main {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;   /* Centraliza horizontalmente */
+    align-items: center;       /* Centraliza verticalmente */
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    background: none;
+}
+.vst-config-bloco {
+    width: 100%;
+    max-width: 700px;
+    min-height: 220px; /* altura menor */
+    padding: 32px 48px;
+    box-sizing: border-box;
+}
+
+.btn-voltar-vst {
+    background-color: black;
+    margin-top: 24px;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+
 }
