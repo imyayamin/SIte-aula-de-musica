@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     fetch('header.html')
         .then(response => response.text())
@@ -135,24 +134,28 @@ const matrizBotoesMIDI = [
     { midi: 61, nota: 'Dó#' },
     { midi: 62, nota: 'Ré' },
     { midi: 63, nota: 'Ré#' },
+    { midi: 64, nota: 'Mi' },
   ], // Linha 1
   [
-    { midi: 64, nota: 'Mi' },
     { midi: 65, nota: 'Fá' },
     { midi: 66, nota: 'Fá#' },
     { midi: 67, nota: 'Sol' },
-  ], // Linha 2
-  [
     { midi: 68, nota: 'Sol#' },
     { midi: 69, nota: 'Lá' },
+  ], // Linha 2
+  [
     { midi: 70, nota: 'Lá#' },
     { midi: 71, nota: 'Si' },
-  ], // Linha 3
-  [
     { midi: 72, nota: 'Dó (oitava acima)' },
     { midi: 73, nota: 'Dó# (oitava acima)' },
     { midi: 74, nota: 'Ré (oitava acima)' },
+  ], // Linha 3
+  [
     { midi: 75, nota: 'Ré# (oitava acima)' },
+    { midi: 76, nota: 'Mi (oitava acima)' },
+    { midi: 77, nota: 'Fá (oitava acima)' },
+    { midi: 78, nota: 'Fá# (oitava acima)' },
+    { midi: 79, nota: 'Sol (oitava acima)' },
   ] // Linha 4
 ];
 // fim do teste do MIDI
@@ -165,105 +168,138 @@ const botoes = [
 ];
 
 const atividades = {
+  // Notas musicais (com acidentes)
   1: {
-    titulo: "Teclado - Escalas",
-    notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si", "Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si", "Dó"],
-    instrumento: "teclado",
+    titulo: "Notas naturais e sustenidos",
+    notas: ["Dó", "Dó#", "Ré", "Ré#", "Mi", "Fá", "Fá#", "Sol", "Sol#", "Lá", "Lá#", "Si"],
+    conteudo: "As 12 notas musicais são a base de toda a música ocidental. Incluem as notas naturais e seus acidentes (sustenidos e bemóis). Toque todas as notas da escala cromática em ordem ascendente.",
+    tipo: "notas"
   },
   2: {
-    titulo: "Teclado - Acordes", 
-    notas: ["Dó", "Mi", "Sol"], 
-    instrumento: "teclado",
+    titulo: "Notas descendentes",
+    notas: ["Si", "Lá#", "Lá", "Sol#", "Sol", "Fá#", "Fá", "Mi", "Ré#", "Ré", "Dó#", "Dó"],
+    conteudo: "As notas podem ser tocadas em ordem descendente. Toque todas as notas da escala cromática em ordem descendente.",
+    tipo: "notas"
   },
   3: {
-    titulo: "Teclado - Do-Re-Mi", 
-    notas: ["Dó", "Dó", "Ré", "Mi", "Mi", "Fá", "Fá#", "Sol", "Sol", "Sol", "Lá", "Si", "Si", "Dó", "Dó", "Dó", "Ré", "Mi", "Fá", "Fá#", "Sol", "Fá#", "Mi", "Ré", "Dó"], 
-    instrumento: "teclado",
+    titulo: "Notas alternadas",
+    notas: ["Dó", "Mi", "Ré#", "Fá#", "Sol", "Lá#", "Si", "Ré", "Fá", "Lá"],
+    conteudo: "Alternar notas ajuda a desenvolver agilidade e reconhecimento auditivo. Toque as notas alternadas da sequência proposta.",
+    tipo: "notas"
   },
   4: {
-    titulo: "Teclado - Cucaracha",
-    notas: ["Sol", "Sol", "Lá", "Sol", "Dó", "Si", "Sol", "Sol", "Lá", "Sol", "Dó", "Si", "Sol", "Sol", "Lá", "Sol", "Dó", "Si", "Sol", "Fá#", "Mi"], 
-    instrumento: "teclado",
+    titulo: "Notas com saltos",
+    notas: ["Dó", "Sol", "Ré", "Lá", "Mi", "Si", "Fá", "Dó (oitava acima)"],
+    conteudo: "Saltos entre notas treinam a percepção de distância entre sons. Toque as notas saltando intervalos conforme a sequência.",
+    tipo: "notas"
   },
   5: {
-    titulo: "Teclado - Parabéns pra você", 
-    notas: ["Dó", "Dó", "Ré"], 
-    instrumento: "teclado",
+    titulo: "Sevenfour - Deltarune OST",
+    notas: ["Mi", "Mi", "Mi", "Ré", "Dó", "Sol", "Sol", "Mi", "Ré", "Dó", "Dó", "Mi", "Mi", "Ré", "Dó", "Sol"],
+    conteudo: "Exercícios musicais simples ajudam a fixar as notas. Toque a sequência para tocar a musiquinha.",
+    tipo: "notas"
   },
+
+  // Intervalos
   201: {
-    titulo: "Piano - Escalas", 
-    notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"], 
-    instrumento: "piano",
+    titulo: "Intervalo de 2ª maior",
+    notas: ["Dó", "Ré", "Mi", "Fá#", "Sol#", "Lá#"],
+    conteudo: "Intervalos são a distância entre duas notas. A 2ª maior corresponde a dois semitons. Toque pares de notas com intervalo de 2ª maior.",
+    tipo: "intervalos"
   },
   202: {
-    titulo: "Piano - Acordes", 
-    notas: ["Dó", "Fá", "Sol"], 
-    instrumento: "piano",
+    titulo: "Intervalo de 3ª menor",
+    notas: ["Dó", "Ré#", "Fá", "Sol#", "Lá", "Dó (oitava acima)"],
+    conteudo: "A 3ª menor corresponde a três semitons. Toque pares de notas com intervalo de 3ª menor.",
+    tipo: "intervalos"
   },
   203: {
-    titulo: "Piano - Mão Direita", 
-    notas: ["Mi", "Fá", "Sol"], 
-    instrumento: "piano",
+    titulo: "Intervalo de 4ª justa",
+    notas: ["Dó", "Fá", "Ré", "Sol", "Mi", "Lá"],
+    conteudo: "A 4ª justa é um intervalo comum em melodias. Toque pares de notas com intervalo de 4ª justa.",
+    tipo: "intervalos"
   },
   204: {
-    titulo: "Piano - Mão Esquerda", 
-    notas: ["Dó", "Mi", "Sol"], 
-    instrumento: "piano",
+    titulo: "Intervalo de 5ª justa",
+    notas: ["Dó", "Sol", "Fá", "Dó (oitava acima)", "Lá", "Mi"],
+    conteudo: "A 5ª justa é fundamental para a formação de acordes. Toque pares de notas com intervalo de 5ª justa.",
+    tipo: "intervalos"
   },
   205: {
-    titulo: "Piano - Melodia Simples", 
-    notas: ["Dó", "Dó", "Sol", "Sol", "Lá", "Lá", "Sol"], 
-    instrumento: "piano",
+    titulo: "Musiquinha: Intervalos saltitantes",
+    notas: ["Dó", "Fá", "Ré", "Sol", "Mi", "Lá", "Dó (oitava acima)"],
+    conteudo: "Exercícios musicais com intervalos variados. Toque a sequência para tocar a musiquinha.",
+    tipo: "intervalos"
   },
+
+  // Escalas
   401: {
-    titulo: "Acordeão - Escalas", 
-    notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si"], 
-    instrumento: "acordeão",
+    titulo: "Escala maior de Dó",
+    notas: ["Dó", "Ré", "Mi", "Fá", "Sol", "Lá", "Si", "Dó (oitava acima)"],
+    conteudo: "Escalas são sequências de notas em ordem crescente ou decrescente. Toque a escala maior de Dó.",
+    tipo: "escalas"
   },
   402: {
-    titulo: "Acordeão - Acordes", 
-    notas: ["Dó", "Fá", "Sol"], 
-    instrumento: "acordeão",
+    titulo: "Escala menor de Lá",
+    notas: ["Lá", "Si", "Dó", "Ré", "Mi", "Fá", "Sol", "Lá"],
+    conteudo: "A escala menor tem um som mais melancólico. Toque a escala menor de Lá.",
+    tipo: "escalas"
   },
   403: {
-    titulo: "Acordeão - Mão Direita", 
-    notas: ["Mi", "Fá", "Sol"], 
-    instrumento: "acordeão",
+    titulo: "Escala maior de Sol",
+    notas: ["Sol", "Lá", "Si", "Dó", "Ré", "Mi", "Fá#", "Sol"],
+    conteudo: "Escalas com sustenidos treinam a leitura de acidentes. Toque a escala maior de Sol.",
+    tipo: "escalas"
   },
   404: {
-    titulo: "Acordeão - Mão Esquerda", 
-    notas: ["Dó", "Sol"], 
-    instrumento: "acordeão",
+    titulo: "Escala menor de Mi",
+    notas: ["Mi", "Fá#", "Sol", "Lá", "Si", "Dó", "Ré", "Mi"],
+    conteudo: "Praticar escalas em diferentes tons amplia o domínio do instrumento. Toque a escala menor de Mi.",
+    tipo: "escalas"
   },
   405: {
-    titulo: "Acordeão - Pequena música", 
-    notas: ["Dó", "Mi", "Sol", "Fá", "Mi", "Dó"], 
-    instrumento: "acordeão",
+    titulo: "Musiquinha: Escalando",
+    notas: ["Dó", "Mi", "Fá", "Sol", "Lá", "Sol", "Fá", "Mi", "Dó"],
+    conteudo: "Exercícios musicais com escalas. Toque a sequência para tocar a musiquinha.",
+    tipo: "escalas"
   },
+
+  // Acordes
   601: {
-    titulo: "Violoncelo - Corda Sol", 
-    notas: ["Sol", "Lá", "Si", "Dó"], 
-    instrumento: "violoncelo",
+    titulo: "Acorde de Dó maior",
+    notas: ["Dó", "Mi", "Sol"],
+    conteudo: "Acordes são formados por três ou mais notas tocadas simultaneamente. Pressione Dó, Mi e Sol ao mesmo tempo para formar o acorde de Dó maior.",
+    tipo: "acordes"
   },
   602: {
-    titulo: "Violoncelo - Corda Ré", 
-    notas: ["Ré", "Mi", "Fá#", "Sol"], 
-    instrumento: "violoncelo",
+    titulo: "Acorde de Fá maior",
+    notas: ["Fá", "Lá", "Dó (oitava acima)"],
+    conteudo: "O acorde de Fá maior é formado por Fá, Lá e Dó. Pressione Fá, Lá e Dó ao mesmo tempo.",
+    tipo: "acordes"
   },
   603: {
-    titulo: "Violoncelo - Corda Lá", 
-    notas: ["Lá", "Si", "Dó#", "Ré"], 
-    instrumento: "violoncelo",
+    titulo: "Acorde de Sol maior",
+    notas: ["Sol", "Si", "Ré"],
+    conteudo: "O acorde de Sol maior é formado por Sol, Si e Ré. Pressione Sol, Si e Ré ao mesmo tempo.",
+    tipo: "acordes"
   },
   604: {
-    titulo: "Violoncelo - Corda Dó", 
-    notas: ["Dó", "Ré", "Mi", "Fá"], 
-    instrumento: "violoncelo",
+    titulo: "Acorde de Lá menor",
+    notas: ["Lá", "Dó", "Mi"],
+    conteudo: "O acorde de Lá menor é formado por Lá, Dó e Mi. Pressione Lá, Dó e Mi ao mesmo tempo.",
+    tipo: "acordes"
   },
   605: {
-    titulo: "Violoncelo - Escalas Completas", 
-    notas: ["Sol", "Lá", "Si", "Dó", "Ré", "Mi", "Fá", "Sol"], 
-    instrumento: "violoncelo",
+    titulo: "Musiquinha: Acordes em sequência",
+    notas: [
+      ["Dó", "Mi", "Sol"], // C
+      ["Fá", "Lá", "Dó"], // F
+      ["Sol", "Si", "Ré"], // G
+      ["Lá", "Dó", "Mi"], // Am
+      ["Dó", "Mi", "Sol"]  // C
+    ],
+    conteudo: "Progressões de acordes são a base de muitas músicas. Toque os acordes em sequência, pressionando as notas de cada acorde ao mesmo tempo.",
+    tipo: "acordes"
   }
 };
 
@@ -319,70 +355,62 @@ let indiceNotaAtual = 0;
 // A variável 'progresso' armazena os dados do progresso do usuário, carregando informações do 'localStorage' se existir, caso contrário, define um valor padrão.
 // Progresso individual por usuário
 let usuarioAtual = JSON.parse(localStorage.getItem('usuario'));
-let progresso = { teclado: [], piano: [], acordeão: [], violoncelo: [] };
+let progresso = { notas: [], intervalos: [], escalas: [], acordes: [] };
 if (usuarioAtual && usuarioAtual.email) {
   progresso = JSON.parse(localStorage.getItem('progresso_' + usuarioAtual.email)) || progresso;
 }
 
 // Aqui estamos criando dois conjuntos (Sets) que serão usados para verificar as atividades do usuário.
-const primeirosIds = new Set(); // Para armazenar os primeiros IDs de cada instrumento
-const instrumentosVistos = new Set(); // Para armazenar os instrumentos que já foram vistos
+const primeirosIds = new Set(); // Para armazenar os primeiros IDs de cada tipo
+const tiposVistos = new Set(); // Para armazenar os tipos que já foram vistos
 
 // Este loop percorre todos os 'botoes' que representam as atividades na página
 for (const id of botoes) {
-  const atividade = atividades[id]; // Pega a atividade relacionada ao botão, usando o ID
-  if (!atividade) continue; // Se a atividade não existir, pula para o próximo botão
+  const atividade = atividades[id];
+  if (!atividade) continue;
 
-  // Aqui estamos verificando se o instrumento dessa atividade já foi visto
-  if (!instrumentosVistos.has(atividade.instrumento)) {
-    primeirosIds.add(id); // Se não foi visto, adiciona o ID dessa atividade nos 'primeirosIds'
-    instrumentosVistos.add(atividade.instrumento); // Marca esse instrumento como já visto
+  // Aqui estamos verificando se o tipo dessa atividade já foi visto
+  if (!tiposVistos.has(atividade.tipo)) {
+    primeirosIds.add(id);
+    tiposVistos.add(atividade.tipo);
   }
 }
 
 // Este trecho de código aplica lógica de desbloqueio dos botões de atividades na página
 document.querySelectorAll('.atividade-botao').forEach(botao => {
-  const id = botao.getAttribute('data-id'); // Pega o ID da atividade do botão
-  const atividade = atividades[id]; // Pega os dados da atividade associada a esse ID
+  const id = botao.getAttribute('data-id');
+  const atividade = atividades[id];
+  if (!atividade) return;
 
-  if (!atividade) return; // Se a atividade não existir, pula para o próximo botão
-
-  const anteriorIndex = botoes.indexOf(id) - 1; // Calcula o índice da atividade anterior
-  const anteriorId = botoes[anteriorIndex]; // Pega o ID da atividade anterior
+  const anteriorIndex = botoes.indexOf(id) - 1;
+  const anteriorId = botoes[anteriorIndex];
 
   // Verifica se a atividade pode ser desbloqueada com base nas condições de progresso
-  const podeDesbloquear = primeirosIds.has(id) || progresso[atividade.instrumento].includes(anteriorId);
+  const podeDesbloquear = primeirosIds.has(id) || progresso[atividade.tipo].includes(anteriorId);
 
-  // Se não puder desbloquear, desabilita o botão e marca ele como bloqueado
   if (!podeDesbloquear) {
     botao.disabled = true;
     botao.classList.add('bloqueado');
-    botao.title = "Conclua a atividade anterior para desbloquear"; // Define o título do botão
-  } else { // Se puder desbloquear, habilita o botão e adiciona um título
+    botao.title = "Conclua a atividade anterior para desbloquear";
+  } else {
     botao.disabled = false;
     botao.classList.remove('bloqueado');
     botao.title = atividade.titulo;
-
-    // Adiciona um evento de clique no botão, que chama a função 'mostrarAtividade' quando clicado
     botao.addEventListener('click', () => {
-      mostrarAtividade(id); // Função para mostrar a atividade ao usuário
+      mostrarAtividade(id);
     });
   }
 });
 
-// Função que reativa os botões de atividades para um instrumento específico
-function reativarBotoes(instrumento) {
+// Função que reativa os botões de atividades para um tipo específico
+function reativarBotoes(tipo) {
   document.querySelectorAll('.atividade-botao').forEach(botao => {
-    const id = botao.getAttribute('data-id'); // Pega o ID da atividade do botão
-    const atividade = atividades[id]; // Pega os dados da atividade
+    const id = botao.getAttribute('data-id');
+    const atividade = atividades[id];
+    if (!atividade || atividade.tipo !== tipo) return;
 
-    // Se a atividade não existir ou for de outro instrumento, ignora esse botão
-    if (!atividade || atividade.instrumento !== instrumento) return;
-
-    const anteriorId = (parseInt(id) - 1).toString(); // Pega o ID da atividade anterior
-
-    // Se a atividade anterior foi concluída, libera o botão dessa atividade
-    if (id !== '1' && progresso[instrumento].includes(anteriorId)) {
+    const anteriorId = (parseInt(id) - 1).toString();
+    if (id !== '1' && progresso[tipo].includes(anteriorId)) {
       botao.disabled = false;
       botao.classList.remove('bloqueado');
       botao.title = "";
@@ -392,45 +420,37 @@ function reativarBotoes(instrumento) {
 
 // Função que exibe a atividade selecionada na tela
 function mostrarAtividade(id) {
-  const atividade = atividades[id]; // Pega os dados da atividade
-  if (!atividade) return; // Se não existir a atividade, sai da função
+  const atividade = atividades[id];
+  if (!atividade) return;
 
   document.getElementById('monitor').style.display = 'none';
   primeiraTeclaPressionada = false;
 
-  indiceNotaAtual = 0; // Reseta o índice da nota atual
+  indiceNotaAtual = 0;
 
-  // Atualiza o título e o conteúdo da atividade na página
   document.getElementById('atividade-titulo').textContent = atividade.titulo;
   document.getElementById('atividade-conteudo').textContent = atividade.conteudo;
 
-  // Limpa o conteúdo anterior de notas
   const notasDiv = document.getElementById('notas');
   notasDiv.innerHTML = '';
-
-  // Limpa a lista de notas pressionadas
   document.getElementById('notas-pressionadas').innerHTML = '';
 
-  // Adiciona as notas da atividade na página
   atividade.notas.forEach(nota => {
-    const notaDiv = document.createElement('div'); // Cria um novo div para cada nota
-    notaDiv.classList.add('nota'); // Adiciona uma classe CSS para estilizar
-    notaDiv.textContent = nota; // Adiciona o texto da nota
-    notaDiv.setAttribute('data-nota', nota); // Define um atributo 'data-nota' com o nome da nota
-    notasDiv.appendChild(notaDiv); // Adiciona o div de nota na página
+    const notaDiv = document.createElement('div');
+    notaDiv.classList.add('nota');
+    notaDiv.textContent = nota;
+    notaDiv.setAttribute('data-nota', nota);
+    notasDiv.appendChild(notaDiv);
   });
 
-  // Esconde o monitor enquanto a atividade é mostrada
   const monitor = document.getElementById('monitor');
   monitor.style.display = 'none';
-
-  // Exibe o container da atividade
   document.getElementById('atividade-container').style.display = 'block';
 
-  primeiraTeclaPressionada = false; 
+  primeiraTeclaPressionada = false;
 
   // Atualiza a barra de progresso da atividade
-  atualizarBarraProgresso(atividade.instrumento);
+  atualizarBarraProgresso(atividade.tipo);
 }
 
 // Função que registra as notas pressionadas pelo usuário
@@ -495,8 +515,8 @@ function verificarSequencia(notaPressionada) {
     // Se todas as notas foram tocadas corretamente, marca a atividade como concluída
     if (indiceNotaAtual >= atividade.notas.length) {
       setTimeout(() => {
-        if (!progresso[atividade.instrumento].includes(atividadeId)) {
-          progresso[atividade.instrumento].push(atividadeId);
+        if (!progresso[atividade.tipo].includes(atividadeId)) {
+          progresso[atividade.tipo].push(atividadeId);
           // Salva progresso individual por usuário
           if (usuarioAtual && usuarioAtual.email) {
             localStorage.setItem('progresso_' + usuarioAtual.email, JSON.stringify(progresso));
@@ -511,10 +531,10 @@ function verificarSequencia(notaPressionada) {
             });
           }
 
-        reativarBotoes(atividade.instrumento);
-      }
+          reativarBotoes(atividade.tipo);
+        }
       
-        atualizarBarraProgresso(atividade.instrumento);
+        atualizarBarraProgresso(atividade.tipo);
       
         alert("Parabéns! Você completou a atividade!🎉");
       
@@ -554,13 +574,13 @@ function carregarProximaAtividade() {
     return;
   }
 
-  const instrumentoAtual = atividades[atividadeIdAtual].instrumento;
+  const tipoAtual = atividades[atividadeIdAtual].tipo;
 
-  // Procura a próxima atividade do mesmo instrumento
+  // Procura a próxima atividade do mesmo tipo
   let proximoId = null;
   for (let i = indiceAtual + 1; i < botoes.length; i++) {
     const id = botoes[i].toString();
-    if (atividades[id] && atividades[id].instrumento === instrumentoAtual) {
+    if (atividades[id] && atividades[id].tipo === tipoAtual) {
       proximoId = id;
       break;
     }
@@ -569,7 +589,7 @@ function carregarProximaAtividade() {
   if (proximoId) {
     mostrarAtividade(proximoId);
   } else {
-    alert('Você concluiu todas as atividades deste instrumento!');
+    alert('Você concluiu todas as atividades deste conceito!');
     document.getElementById('atividade-container').style.display = 'none';
   }
 }
@@ -649,16 +669,33 @@ window.addEventListener('load', function () {
 });
 
 // Função que atualiza a barra de progresso do instrumento na página
-function atualizarBarraProgresso(instrumento) {
-  const total = Object.values(atividades).filter(a => a.instrumento === instrumento).length; // Conta o total de atividades para o instrumento
-  const feitas = progresso[instrumento].length; // Conta o número de atividades concluídas para o instrumento
+function atualizarBarraProgresso(tipo) {
+  const total = Object.values(atividades).filter(a => a.tipo === tipo).length;
+  const feitas = progresso[tipo].length;
 
   document.getElementById('progresso-texto').textContent =
     `Progresso: ${feitas} de ${total} atividades concluídas`;
 
-  const barra = document.getElementById('barra-progresso'); // Pega a barra de progresso na página
-  const percentual = (feitas / total) * 100; // Calcula a porcentagem do progresso
-  barra.style.width = percentual + '%'; // Atualiza a largura da barra de acordo com o progresso
+  const barra = document.getElementById('barra-progresso');
+  const percentual = (feitas / total) * 100;
+  barra.style.width = percentual + '%';
+}
+
+// Função que reseta o progresso do usuário
+function zerarProgresso() {
+  localStorage.removeItem('progresso'); // Remove os dados do progresso armazenados
+  location.reload(); // Recarrega a página para reiniciar as atividades
+}
+
+function limparMonitor() {
+  const logDiv = document.getElementById('notas-pressionadas');
+  if (logDiv) { //verifica a existencia
+    logDiv.innerHTML = ''; // Apaga todo o conteúdo da div de uma vez
+  }
+}
+
+function reiniciarAtividade(){ 
+  location.reload();
 }
 
 // Função que reseta o progresso do usuário
